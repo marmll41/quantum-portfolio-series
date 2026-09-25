@@ -1,6 +1,6 @@
 # License for documentation and data
 
-The documentation texts (`README.md`,
+The documentation texts (`README.md`, `README.de.md`,
 `quellen-dossier.md`, `ergebnisse-speedup.md`, `archiv/README.md`) and result files (`results_*.json`, `data/*.json`, `data/*.npz`,
 `*.log`) in this repository are licensed under the
 **Creative Commons Attribution 4.0 International License (CC BY 4.0)**.
