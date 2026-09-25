@@ -1,0 +1,179 @@
+{
+  "env": {
+    "timestamp": "2026-09-22T17:37:13+0200",
+    "python": "3.14.7",
+    "numpy": "2.5.3",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "machine": "arm64",
+    "processor": "arm",
+    "cpu_count": 28,
+    "blas_threads_pinned": "1",
+    "n_assets": 100,
+    "confidence": 0.99
+  },
+  "truth": {
+    "mean": -0.00027065859998074717,
+    "var": 0.027018678541205373,
+    "cvar": 0.03099376673558424
+  },
+  "results": {
+    "full": [
+      {
+        "sampler": "full",
+        "n": 1000,
+        "reps": 5,
+        "workers": 28,
+        "time_median_s": 0.2282399170071585,
+        "time_min_s": 0.22194054200372193,
+        "time_max_s": 0.22929091600235552,
+        "paths_per_s": 4381.354554946828,
+        "rmse_mean": NaN,
+        "relerr_mean": NaN,
+        "rmse_var": NaN,
+        "relerr_var": NaN,
+        "rmse_cvar": NaN,
+        "relerr_cvar": NaN
+      },
+      {
+        "sampler": "full",
+        "n": 10000,
+        "reps": 5,
+        "workers": 28,
+        "time_median_s": 0.22553362499456853,
+        "time_min_s": 0.22122270900581498,
+        "time_max_s": 0.23675412499869708,
+        "paths_per_s": 44339.286437846364,
+        "rmse_mean": NaN,
+        "relerr_mean": NaN,
+        "rmse_var": NaN,
+        "relerr_var": NaN,
+        "rmse_cvar": NaN,
+        "relerr_cvar": NaN
+      },
+      {
+        "sampler": "full",
+        "n": 100000,
+        "reps": 5,
+        "workers": 28,
+        "time_median_s": 0.23140666700783186,
+        "time_min_s": 0.22693970800901297,
+        "time_max_s": 0.23534729100356344,
+        "paths_per_s": 432139.66690344125,
+        "rmse_mean": NaN,
+        "relerr_mean": NaN,
+        "rmse_var": NaN,
+        "relerr_var": NaN,
+        "rmse_cvar": NaN,
+        "relerr_cvar": NaN
+      },
+      {
+        "sampler": "full",
+        "n": 1000000,
+        "reps": 5,
+        "workers": 28,
+        "time_median_s": 0.2841924160020426,
+        "time_min_s": 0.2823976249928819,
+        "time_max_s": 0.2864275419997284,
+        "paths_per_s": 3518742.7379934466,
+        "rmse_mean": NaN,
+        "relerr_mean": NaN,
+        "rmse_var": NaN,
+        "relerr_var": NaN,
+        "rmse_cvar": NaN,
+        "relerr_cvar": NaN
+      },
+      {
+        "sampler": "full",
+        "n": 10000000,
+        "reps": 5,
+        "workers": 28,
+        "time_median_s": 0.7183454999903915,
+        "time_min_s": 0.7131538340036059,
+        "time_max_s": 0.7230055409891065,
+        "paths_per_s": 13920877.906430483,
+        "rmse_mean": NaN,
+        "relerr_mean": NaN,
+        "rmse_var": NaN,
+        "relerr_var": NaN,
+        "rmse_cvar": NaN,
+        "relerr_cvar": NaN
+      }
+    ]
+  },
+  "fits": {
+    "full": {
+      "mean": {
+        "slope_fitted": NaN,
+        "throughput_paths_s": 13920877.906430483,
+        "eps_0.01": {
+          "seconds": NaN,
+          "n_required": NaN,
+          "extrapolated": true
+        },
+        "eps_0.001": {
+          "seconds": NaN,
+          "n_required": NaN,
+          "extrapolated": true
+        },
+        "eps_0.0001": {
+          "seconds": NaN,
+          "n_required": NaN,
+          "extrapolated": true
+        },
+        "eps_1e-06": {
+          "seconds": NaN,
+          "n_required": NaN,
+          "extrapolated": true
+        }
+      },
+      "var": {
+        "slope_fitted": NaN,
+        "throughput_paths_s": 13920877.906430483,
+        "eps_0.01": {
+          "seconds": NaN,
+          "n_required": NaN,
+          "extrapolated": true
+        },
+        "eps_0.001": {
+          "seconds": NaN,
+          "n_required": NaN,
+          "extrapolated": true
+        },
+        "eps_0.0001": {
+          "seconds": NaN,
+          "n_required": NaN,
+          "extrapolated": true
+        },
+        "eps_1e-06": {
+          "seconds": NaN,
+          "n_required": NaN,
+          "extrapolated": true
+        }
+      },
+      "cvar": {
+        "slope_fitted": NaN,
+        "throughput_paths_s": 13920877.906430483,
+        "eps_0.01": {
+          "seconds": NaN,
+          "n_required": NaN,
+          "extrapolated": true
+        },
+        "eps_0.001": {
+          "seconds": NaN,
+          "n_required": NaN,
+          "extrapolated": true
+        },
+        "eps_0.0001": {
+          "seconds": NaN,
+          "n_required": NaN,
+          "extrapolated": true
+        },
+        "eps_1e-06": {
+          "seconds": NaN,
+          "n_required": NaN,
+          "extrapolated": true
+        }
+      }
+    }
+  }
+}

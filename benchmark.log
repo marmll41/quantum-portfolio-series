@@ -1,0 +1,386 @@
+== machine Apple M3 Max, 14 cores, workers=14 | 2026-09-24 09:50:09 | load averages: 1.93 2.78 3.27
+== normal: baseline error curve, 1 core | 2026-09-24 09:50:09 | load averages: 1.93 2.78 3.27
+Portfolio: 100 assets, 99% confidence, 1d horizon
+Exact reference   mean=-0.00084023  VaR=+0.03152594  CVaR=+0.03624054
+Workers=1  reps=20  BLAS pin=1
+
+--- sampler: full ---
+           N  time_med(s)        paths/s  relerr_mean   relerr_VaR  relerr_CVaR
+       1,000       0.0006      1,792,315     3.44e-02     3.83e-02     5.17e-02
+      10,000       0.0053      1,870,485     1.17e-02     1.58e-02     1.72e-02
+     100,000       0.0582      1,717,405     3.43e-03     4.33e-03     5.46e-03
+   1,000,000       0.5847      1,710,409     1.13e-03     1.62e-03     1.95e-03
+  10,000,000       5.8053      1,722,563     2.75e-04     5.06e-04     4.30e-04
+
+--- sampler: reduced ---
+           N  time_med(s)        paths/s  relerr_mean   relerr_VaR  relerr_CVaR
+       1,000       0.0001     19,062,681     3.40e-02     5.19e-02     5.44e-02
+      10,000       0.0002     65,475,231     7.01e-03     1.60e-02     1.39e-02
+     100,000       0.0013     79,476,789     2.87e-03     4.78e-03     5.69e-03
+   1,000,000       0.0105     95,644,777     8.64e-04     1.64e-03     1.60e-03
+  10,000,000       0.1169     85,558,157     3.73e-04     6.10e-04     5.95e-04
+
+==========================================================================
+ERROR LAW  (1/sqrt(N) predicts slope = -0.500)
+      full / mean  slope = -0.5211
+      full / var   slope = -0.4747
+      full / cvar  slope = -0.5105
+   reduced / mean  slope = -0.4830
+   reduced / var   slope = -0.4849
+   reduced / cvar  slope = -0.4863
+
+CVaR ERROR CONSTANT  exact C = 1.7615   measured C*sqrt(N) per grid point: [1.635, 1.717, 1.725, 1.951, 1.359]
+
+WALL-CLOCK TIME TO TARGET ACCURACY  (sampler=full, CVaR@99%, exact C)
+  eps = 0.01      N =             31,028   t =        0.017 s   (measured range)
+  eps = 0.001     N =          3,102,839   t =        1.659 s   (measured range)
+  eps = 0.0001    N =        310,283,903   t =      165.884 s   (extrapolated)
+  eps = 1e-06     N =  3,102,839,025,470   t =  1658842.281 s   (extrapolated)
+
+wrote results_1core.json
+== normal: multi-core throughput | 2026-09-24 09:52:21 | load averages: 1.96 2.46 3.06
+N = 20,000,000 paths, 100 assets, persistent pool, BLAS pinned to 1, sp100/normal
+
+ workers  time_med(s)          paths/s   speedup     eff
+       1       11.540        1,733,148      1.0x   100%
+       2        5.937        3,368,709      1.9x    97%
+       4        3.235        6,181,884      3.6x    89%
+       8        1.916       10,438,086      6.0x    75%
+      14        1.434       13,946,163      8.0x    57%
+
+wrote throughput.json
+== normal: variance reduction (curves + timing) | 2026-09-24 09:53:34 | load averages: 4.29 2.85 3.15
+CVaR@99% truth = 0.03624054   reps=20   pin=1
+
+         full  N=        16  relerr=4.015e-01  t=0.0001s
+         full  N=        32  relerr=2.957e-01  t=0.0001s
+         full  N=        64  relerr=2.042e-01  t=0.0001s
+         full  N=       128  relerr=1.299e-01  t=0.0001s
+         full  N=       256  relerr=7.790e-02  t=0.0002s
+         full  N=       512  relerr=6.372e-02  t=0.0003s
+         full  N=     1,024  relerr=5.153e-02  t=0.0006s
+         full  N=     2,048  relerr=4.053e-02  t=0.0011s
+         full  N=     4,096  relerr=3.134e-02  t=0.0021s
+         full  N=     8,192  relerr=2.235e-02  t=0.0043s
+         full  N=    16,384  relerr=9.621e-03  t=0.0092s
+         full  N=    32,768  relerr=7.286e-03  t=0.0191s
+         full  N=    65,536  relerr=6.621e-03  t=0.0382s
+         full  N=   131,072  relerr=5.387e-03  t=0.0761s
+         full  N=   262,144  relerr=3.061e-03  t=0.1532s
+         full  N=   524,288  relerr=2.414e-03  t=0.3053s
+         full  N= 1,048,576  relerr=1.758e-03  t=0.6070s
+         full  N= 2,097,152  relerr=9.940e-04  t=1.2188s
+         full  N= 4,194,304  relerr=8.590e-04  t=2.4575s
+  -> slope -0.493  N(eps)=3,102,839  run N=3,102,840  1 core(s):   1815.3 ms (check err 7.08e-04)  14 core(s):    265.8 ms (check err 8.52e-04)
+
+     qmc_chol  N=        16  relerr=3.062e-01  t=0.0017s
+     qmc_chol  N=        32  relerr=2.223e-01  t=0.0017s
+     qmc_chol  N=        64  relerr=1.775e-01  t=0.0017s
+     qmc_chol  N=       128  relerr=9.140e-02  t=0.0018s
+     qmc_chol  N=       256  relerr=6.334e-02  t=0.0019s
+     qmc_chol  N=       512  relerr=4.105e-02  t=0.0022s
+     qmc_chol  N=     1,024  relerr=3.294e-02  t=0.0028s
+     qmc_chol  N=     2,048  relerr=1.350e-02  t=0.0040s
+     qmc_chol  N=     4,096  relerr=7.435e-03  t=0.0064s
+     qmc_chol  N=     8,192  relerr=6.447e-03  t=0.0112s
+     qmc_chol  N=    16,384  relerr=3.331e-03  t=0.0213s
+     qmc_chol  N=    32,768  relerr=1.619e-03  t=0.0417s
+     qmc_chol  N=    65,536  relerr=1.516e-03  t=0.0823s
+     qmc_chol  N=   131,072  relerr=1.125e-03  t=0.1608s
+     qmc_chol  N=   262,144  relerr=6.429e-04  t=0.3187s
+     qmc_chol  N=   524,288  relerr=3.769e-04  t=0.6359s
+     qmc_chol  N= 1,048,576  relerr=2.520e-04  t=1.2683s
+     qmc_chol  N= 2,097,152  relerr=1.645e-04  t=2.5351s
+     qmc_chol  N= 4,194,304  relerr=1.375e-04  t=5.0615s
+  calibration: N=131,072 x100: relerr 9.267e-04 -> N(eps)=113,959
+  -> slope -0.652  N(eps)=113,959  run N=131,072  1 core(s):    161.2 ms (check err 1.06e-03)  14 core(s):     27.5 ms (check err 1.06e-03)
+
+      qmc_pca  N=        16  relerr=3.379e-01  t=0.0017s
+      qmc_pca  N=        32  relerr=2.516e-01  t=0.0017s
+      qmc_pca  N=        64  relerr=1.867e-01  t=0.0017s
+      qmc_pca  N=       128  relerr=1.097e-01  t=0.0018s
+      qmc_pca  N=       256  relerr=6.600e-02  t=0.0019s
+      qmc_pca  N=       512  relerr=4.107e-02  t=0.0022s
+      qmc_pca  N=     1,024  relerr=1.903e-02  t=0.0027s
+      qmc_pca  N=     2,048  relerr=1.494e-02  t=0.0038s
+      qmc_pca  N=     4,096  relerr=5.931e-03  t=0.0060s
+      qmc_pca  N=     8,192  relerr=4.292e-03  t=0.0106s
+      qmc_pca  N=    16,384  relerr=2.323e-03  t=0.0209s
+      qmc_pca  N=    32,768  relerr=2.015e-03  t=0.0412s
+      qmc_pca  N=    65,536  relerr=1.227e-03  t=0.0811s
+      qmc_pca  N=   131,072  relerr=7.130e-04  t=0.1599s
+      qmc_pca  N=   262,144  relerr=4.615e-04  t=0.3180s
+      qmc_pca  N=   524,288  relerr=3.559e-04  t=0.6320s
+      qmc_pca  N= 1,048,576  relerr=1.594e-04  t=1.2617s
+      qmc_pca  N= 2,097,152  relerr=1.034e-04  t=2.5214s
+      qmc_pca  N= 4,194,304  relerr=8.234e-05  t=5.0419s
+  calibration: N=131,072 x100: relerr 5.522e-04 -> N(eps)=49,996
+  -> slope -0.697  N(eps)=49,996  run N=65,536  1 core(s):     81.7 ms (check err 8.35e-04)  14 core(s):     17.0 ms (check err 8.35e-04)
+
+           is  N=        16  relerr=2.892e-02  t=0.0000s
+           is  N=        32  relerr=2.345e-02  t=0.0000s
+           is  N=        64  relerr=1.648e-02  t=0.0001s
+           is  N=       128  relerr=1.236e-02  t=0.0001s
+           is  N=       256  relerr=9.494e-03  t=0.0002s
+           is  N=       512  relerr=6.483e-03  t=0.0003s
+           is  N=     1,024  relerr=4.795e-03  t=0.0006s
+           is  N=     2,048  relerr=3.361e-03  t=0.0012s
+           is  N=     4,096  relerr=1.998e-03  t=0.0025s
+           is  N=     8,192  relerr=1.274e-03  t=0.0049s
+           is  N=    16,384  relerr=1.027e-03  t=0.0104s
+           is  N=    32,768  relerr=7.064e-04  t=0.0219s
+           is  N=    65,536  relerr=5.511e-04  t=0.0448s
+           is  N=   131,072  relerr=3.460e-04  t=0.0900s
+           is  N=   262,144  relerr=2.828e-04  t=0.1810s
+           is  N=   524,288  relerr=2.013e-04  t=0.3636s
+           is  N= 1,048,576  relerr=1.473e-04  t=0.7324s
+           is  N= 2,097,152  relerr=1.087e-04  t=1.4790s
+           is  N= 4,194,304  relerr=6.632e-05  t=2.9967s
+  calibration: N=16,514 x100: relerr 9.973e-04 -> N(eps)=16,418
+  -> slope -0.494  N(eps)=16,418  run N=16,419  1 core(s):     11.0 ms (check err 1.41e-03)  14 core(s):      4.5 ms (check err 4.60e-04)
+
+   is_qmc_pca  N=        16  relerr=2.845e-02  t=0.0017s
+   is_qmc_pca  N=        32  relerr=1.582e-02  t=0.0017s
+   is_qmc_pca  N=        64  relerr=1.116e-02  t=0.0017s
+   is_qmc_pca  N=       128  relerr=7.198e-03  t=0.0018s
+   is_qmc_pca  N=       256  relerr=4.368e-03  t=0.0019s
+   is_qmc_pca  N=       512  relerr=2.871e-03  t=0.0022s
+   is_qmc_pca  N=     1,024  relerr=1.664e-03  t=0.0028s
+   is_qmc_pca  N=     2,048  relerr=1.099e-03  t=0.0041s
+   is_qmc_pca  N=     4,096  relerr=7.264e-04  t=0.0064s
+   is_qmc_pca  N=     8,192  relerr=4.353e-04  t=0.0113s
+   is_qmc_pca  N=    16,384  relerr=3.909e-04  t=0.0221s
+   is_qmc_pca  N=    32,768  relerr=2.693e-04  t=0.0440s
+   is_qmc_pca  N=    65,536  relerr=1.352e-04  t=0.0883s
+   is_qmc_pca  N=   131,072  relerr=7.893e-05  t=0.1744s
+   is_qmc_pca  N=   262,144  relerr=4.911e-05  t=0.3474s
+   is_qmc_pca  N=   524,288  relerr=3.570e-05  t=0.6983s
+   is_qmc_pca  N= 1,048,576  relerr=2.394e-05  t=1.3945s
+   is_qmc_pca  N= 2,097,152  relerr=2.060e-05  t=2.7966s
+   is_qmc_pca  N= 4,194,304  relerr=1.166e-05  t=5.6440s
+  calibration: N=4,096 x100: relerr 7.305e-04 -> N(eps)=2,552
+  -> slope -0.623  N(eps)=2,552  run N=4,096  1 core(s):      7.0 ms (check err 9.29e-04)  14 core(s):      5.8 ms (check err 9.29e-04)
+
+wrote results_vr_sp100_normal.json
+       full  N=3,102,840  1c   1817.6 ms (err 6.9e-04)  14c    268.0 ms (err 9.8e-04)
+   qmc_chol  N=  131,072  1c    161.8 ms (err 1.1e-03)  14c     30.2 ms (err 1.1e-03)
+    qmc_pca  N=   65,536  1c     82.3 ms (err 9.2e-04)  14c     17.0 ms (err 9.2e-04)
+         is  N=   16,419  1c     11.4 ms (err 1.2e-03)  14c      4.7 ms (err 7.9e-04)
+ is_qmc_pca  N=    4,096  1c      7.5 ms (err 8.5e-04)  14c      6.0 ms (err 8.5e-04)
+== t: baseline error curve, 1 core | 2026-09-24 10:09:23 | load averages: 2.94 2.19 2.41
+Portfolio: 100 assets, 99% confidence, 1d horizon
+Exact reference   mean=-0.00084023  VaR=+0.03592687  CVaR=+0.04979120
+Workers=1  reps=20  BLAS pin=1
+
+--- sampler: full ---
+           N  time_med(s)        paths/s  relerr_mean   relerr_VaR  relerr_CVaR
+       1,000       0.0006      1,692,703     5.51e-02     1.03e-01     1.94e-01
+      10,000       0.0055      1,806,168     1.61e-02     3.34e-02     5.45e-02
+     100,000       0.0596      1,678,039     4.67e-03     1.00e-02     1.74e-02
+   1,000,000       0.5938      1,684,144     1.07e-03     3.26e-03     4.01e-03
+  10,000,000       5.9463      1,681,721     2.56e-04     6.92e-04     1.20e-03
+
+--- sampler: reduced ---
+           N  time_med(s)        paths/s  relerr_mean   relerr_VaR  relerr_CVaR
+       1,000       0.0001     16,129,031     4.66e-02     7.66e-02     1.90e-01
+      10,000       0.0003     37,508,744     1.36e-02     2.84e-02     6.02e-02
+     100,000       0.0021     47,186,972     3.79e-03     7.76e-03     1.49e-02
+   1,000,000       0.0209     47,898,313     1.23e-03     3.53e-03     5.32e-03
+  10,000,000       0.2232     44,798,556     4.97e-04     1.12e-03     1.53e-03
+
+==========================================================================
+ERROR LAW  (1/sqrt(N) predicts slope = -0.500)
+      full / mean  slope = -0.5843
+      full / var   slope = -0.5355
+      full / cvar  slope = -0.5546
+   reduced / mean  slope = -0.4988
+   reduced / var   slope = -0.4573
+   reduced / cvar  slope = -0.5243
+
+CVaR ERROR CONSTANT  exact C = 4.6487   measured C*sqrt(N) per grid point: [6.123, 5.45, 5.512, 4.009, 3.809]
+
+WALL-CLOCK TIME TO TARGET ACCURACY  (sampler=full, CVaR@99%, exact C)
+  eps = 0.01      N =            216,108   t =        0.120 s   (measured range)
+  eps = 0.001     N =         21,610,831   t =       11.965 s   (extrapolated)
+  eps = 0.0001    N =      2,161,083,132   t =     1196.502 s   (extrapolated)
+  eps = 1e-06     N = 21,610,831,324,566   t = 11965016.112 s   (extrapolated)
+
+wrote results_1core_t.json
+== t: multi-core throughput | 2026-09-24 10:11:40 | load averages: 1.48 1.92 2.27
+N = 20,000,000 paths, 100 assets, persistent pool, BLAS pinned to 1, sp100/t
+
+ workers  time_med(s)          paths/s   speedup     eff
+       1       11.724        1,705,902      1.0x   100%
+       2        6.061        3,299,933      1.9x    97%
+       4        3.243        6,167,170      3.6x    90%
+       8        1.930       10,360,778      6.1x    76%
+      14        1.393       14,357,266      8.4x    60%
+
+wrote throughput_t.json
+== t: variance reduction (curves + timing) | 2026-09-24 10:12:54 | load averages: 3.72 2.31 2.37
+CVaR@99% truth = 0.04979120   reps=20   pin=1
+
+         full  N=        16  relerr=5.276e-01  t=0.0001s
+         full  N=        32  relerr=4.399e-01  t=0.0001s
+         full  N=        64  relerr=3.658e-01  t=0.0001s
+         full  N=       128  relerr=3.012e-01  t=0.0001s
+         full  N=       256  relerr=2.517e-01  t=0.0002s
+         full  N=       512  relerr=1.584e-01  t=0.0003s
+         full  N=     1,024  relerr=1.768e-01  t=0.0006s
+         full  N=     2,048  relerr=1.054e-01  t=0.0011s
+         full  N=     4,096  relerr=7.880e-02  t=0.0022s
+         full  N=     8,192  relerr=5.382e-02  t=0.0043s
+         full  N=    16,384  relerr=3.444e-02  t=0.0092s
+         full  N=    32,768  relerr=2.529e-02  t=0.0193s
+         full  N=    65,536  relerr=2.180e-02  t=0.0388s
+         full  N=   131,072  relerr=1.220e-02  t=0.0775s
+         full  N=   262,144  relerr=1.004e-02  t=0.1554s
+         full  N=   524,288  relerr=7.109e-03  t=0.3104s
+         full  N= 1,048,576  relerr=4.826e-03  t=0.6198s
+         full  N= 2,097,152  relerr=3.665e-03  t=1.2389s
+         full  N= 4,194,304  relerr=1.950e-03  t=2.4808s
+  -> slope -0.450  N(eps)=21,610,831 (extrap.)  run N=21,610,832  1 core(s):  12811.8 ms (check err 1.09e-03)  14 core(s):   1744.7 ms (check err 1.21e-03)
+
+     qmc_chol  N=        16  relerr=1.663e+00  t=0.0018s
+     qmc_chol  N=        32  relerr=1.638e+00  t=0.0018s
+     qmc_chol  N=        64  relerr=1.619e+00  t=0.0018s
+     qmc_chol  N=       128  relerr=8.599e-01  t=0.0019s
+     qmc_chol  N=       256  relerr=5.644e-01  t=0.0021s
+     qmc_chol  N=       512  relerr=2.703e-01  t=0.0024s
+     qmc_chol  N=     1,024  relerr=1.486e-01  t=0.0031s
+     qmc_chol  N=     2,048  relerr=8.257e-02  t=0.0046s
+     qmc_chol  N=     4,096  relerr=4.941e-02  t=0.0074s
+     qmc_chol  N=     8,192  relerr=2.705e-02  t=0.0134s
+     qmc_chol  N=    16,384  relerr=1.438e-02  t=0.0264s
+     qmc_chol  N=    32,768  relerr=7.689e-03  t=0.0522s
+     qmc_chol  N=    65,536  relerr=4.483e-03  t=0.1035s
+     qmc_chol  N=   131,072  relerr=2.378e-03  t=0.2049s
+     qmc_chol  N=   262,144  relerr=1.521e-03  t=0.4096s
+     qmc_chol  N=   524,288  relerr=8.755e-04  t=0.8105s
+     qmc_chol  N= 1,048,576  relerr=4.603e-04  t=1.6228s
+     qmc_chol  N= 2,097,152  relerr=3.327e-04  t=3.2350s
+     qmc_chol  N= 4,194,304  relerr=2.006e-04  t=6.4619s
+  calibration: N=524,288 x100: relerr 1.009e-03 -> N(eps)=530,542
+  -> slope -0.791  N(eps)=530,542  run N=1,048,576  1 core(s):   1617.6 ms (check err 1.07e-03)  14 core(s):    212.9 ms (check err 1.07e-03)
+
+      qmc_pca  N=        16  relerr=5.138e-01  t=0.0017s
+      qmc_pca  N=        32  relerr=4.221e-01  t=0.0017s
+      qmc_pca  N=        64  relerr=3.603e-01  t=0.0018s
+      qmc_pca  N=       128  relerr=4.497e-01  t=0.0019s
+      qmc_pca  N=       256  relerr=2.832e-01  t=0.0021s
+      qmc_pca  N=       512  relerr=1.283e-01  t=0.0024s
+      qmc_pca  N=     1,024  relerr=6.783e-02  t=0.0031s
+      qmc_pca  N=     2,048  relerr=3.921e-02  t=0.0045s
+      qmc_pca  N=     4,096  relerr=2.173e-02  t=0.0073s
+      qmc_pca  N=     8,192  relerr=1.276e-02  t=0.0134s
+      qmc_pca  N=    16,384  relerr=5.863e-03  t=0.0264s
+      qmc_pca  N=    32,768  relerr=3.645e-03  t=0.0522s
+      qmc_pca  N=    65,536  relerr=2.130e-03  t=0.1032s
+      qmc_pca  N=   131,072  relerr=2.246e-03  t=0.2054s
+      qmc_pca  N=   262,144  relerr=1.751e-03  t=0.4069s
+      qmc_pca  N=   524,288  relerr=1.018e-03  t=0.8090s
+      qmc_pca  N= 1,048,576  relerr=5.457e-04  t=1.6195s
+      qmc_pca  N= 2,097,152  relerr=2.235e-04  t=3.2339s
+      qmc_pca  N= 4,194,304  relerr=1.576e-04  t=6.4625s
+  calibration: N=524,288 x100: relerr 9.922e-04 -> N(eps)=519,359
+  -> slope -0.691  N(eps)=519,359  run N=524,288  1 core(s):    811.6 ms (check err 1.30e-03)  14 core(s):    124.7 ms (check err 1.30e-03)
+
+           is  N=        16  relerr=4.741e-01  t=0.0000s
+           is  N=        32  relerr=3.597e-01  t=0.0000s
+           is  N=        64  relerr=2.231e-01  t=0.0001s
+           is  N=       128  relerr=2.003e-01  t=0.0001s
+           is  N=       256  relerr=1.194e-01  t=0.0002s
+           is  N=       512  relerr=3.402e-01  t=0.0003s
+           is  N=     1,024  relerr=6.154e-02  t=0.0006s
+           is  N=     2,048  relerr=5.701e-02  t=0.0013s
+           is  N=     4,096  relerr=5.356e-02  t=0.0025s
+           is  N=     8,192  relerr=3.183e-02  t=0.0050s
+           is  N=    16,384  relerr=2.753e-02  t=0.0106s
+           is  N=    32,768  relerr=1.781e-02  t=0.0222s
+           is  N=    65,536  relerr=1.332e-02  t=0.0454s
+           is  N=   131,072  relerr=8.437e-03  t=0.0914s
+           is  N=   262,144  relerr=6.495e-03  t=0.1833s
+           is  N=   524,288  relerr=4.465e-03  t=0.3691s
+           is  N= 1,048,576  relerr=2.819e-03  t=0.7419s
+           is  N= 2,097,152  relerr=1.744e-03  t=1.4983s
+           is  N= 4,194,304  relerr=1.342e-03  t=3.0750s
+  calibration: N=6,791,726 x100: relerr 1.107e-03 -> N(eps)=8,207,661
+  -> slope -0.470  N(eps)=8,207,661 (extrap.)  run N=8,207,662  1 core(s):   6068.3 ms (check err 1.44e-03)  14 core(s):   1637.8 ms (check err 1.10e-03)
+
+   is_qmc_pca  N=        16  relerr=1.686e+00  t=0.0017s
+   is_qmc_pca  N=        32  relerr=1.504e+00  t=0.0018s
+   is_qmc_pca  N=        64  relerr=7.921e-01  t=0.0018s
+   is_qmc_pca  N=       128  relerr=3.927e-01  t=0.0019s
+   is_qmc_pca  N=       256  relerr=2.028e-01  t=0.0021s
+   is_qmc_pca  N=       512  relerr=1.269e-01  t=0.0025s
+   is_qmc_pca  N=     1,024  relerr=6.502e-02  t=0.0032s
+   is_qmc_pca  N=     2,048  relerr=3.352e-02  t=0.0047s
+   is_qmc_pca  N=     4,096  relerr=1.832e-02  t=0.0078s
+   is_qmc_pca  N=     8,192  relerr=1.840e-02  t=0.0141s
+   is_qmc_pca  N=    16,384  relerr=9.584e-03  t=0.0272s
+   is_qmc_pca  N=    32,768  relerr=6.522e-03  t=0.0548s
+   is_qmc_pca  N=    65,536  relerr=3.901e-03  t=0.1103s
+   is_qmc_pca  N=   131,072  relerr=2.342e-03  t=0.2182s
+   is_qmc_pca  N=   262,144  relerr=2.125e-03  t=0.4345s
+   is_qmc_pca  N=   524,288  relerr=1.421e-03  t=0.8679s
+   is_qmc_pca  N= 1,048,576  relerr=1.029e-03  t=1.7390s
+   is_qmc_pca  N= 2,097,152  relerr=6.113e-04  t=3.4861s
+   is_qmc_pca  N= 4,194,304  relerr=3.542e-04  t=7.0181s
+  calibration: N=1,048,576 x100: relerr 9.851e-04 -> N(eps)=1,024,180
+  -> slope -0.684  N(eps)=1,024,180  run N=1,048,576  1 core(s):   1737.6 ms (check err 7.73e-04)  14 core(s):    288.0 ms (check err 7.73e-04)
+
+wrote results_vr_sp100_t.json
+       full  N=21,610,832  1c  12802.7 ms (err 1.0e-03)  14c   1852.6 ms (err 9.0e-04)
+   qmc_chol  N=1,048,576  1c   1618.7 ms (err 8.0e-04)  14c    204.9 ms (err 8.0e-04)
+    qmc_pca  N=  524,288  1c    812.5 ms (err 1.0e-03)  14c    109.1 ms (err 1.0e-03)
+         is  N=8,207,662  1c   6086.7 ms (err 1.3e-03)  14c   1659.4 ms (err 1.1e-03)
+ is_qmc_pca  N=1,048,576  1c   1746.4 ms (err 9.3e-04)  14c    288.8 ms (err 9.3e-04)
+wrote model.bin  d=100  truth_cvar=0.03624054
+== julia OpenBLAS, 1 threads, N=3102840 | 2026-09-24 10:56:05 | load averages: 3.55 3.37 2.83
+julia 1.12.6  threads=1  blas=libopenblas64_p-r0.3.33.dylib  block=256  N=3102840  reps=20
+  first call incl. compile: 0.270 s
+  time median 2484.68 ms   min 2462.61 ms   relerr_cvar 1.056e-03   paths/s 1.249e+06
+== julia Accelerate, 1 threads, N=3102840 | 2026-09-24 10:56:59 | load averages: 5.62 3.96 3.08
+julia 1.12.6  threads=1  blas=Accelerate  block=256  N=3102840  reps=20
+  first call incl. compile: 0.268 s
+  time median 1347.23 ms   min 1333.96 ms   relerr_cvar 1.056e-03   paths/s 2.303e+06
+== julia OpenBLAS, 14 threads, N=3102840 | 2026-09-24 10:57:29 | load averages: 4.20 3.78 3.05
+julia 1.12.6  threads=14  blas=libopenblas64_p-r0.3.33.dylib  block=256  N=3102840  reps=20
+  first call incl. compile: 0.186 s
+  time median 1356.82 ms   min 1326.61 ms   relerr_cvar 1.104e-03   paths/s 2.287e+06
+== julia Accelerate, 14 threads, N=3102840 | 2026-09-24 10:57:59 | load averages: 6.26 4.34 3.27
+julia 1.12.6  threads=14  blas=Accelerate  block=256  N=3102840  reps=20
+  first call incl. compile: 0.197 s
+  time median 173.02 ms   min 155.06 ms   relerr_cvar 1.104e-03   paths/s 1.793e+07
+== plots | 2026-09-24 10:58:05 | load averages: 6.88 4.50 3.34
+wrote fig_baseline_de_light.png
+wrote fig_baseline_de_dark.png
+wrote fig_baseline_en_light.png
+wrote fig_baseline_en_dark.png
+
+     eps             N required         1 core       14 cores        reduced
+    0.01                 31,028        18.0 ms         2.2 ms         0.4 ms
+   0.001              3,102,839          1.8 s       222.5 ms        36.3 ms
+  0.0001            310,283,903        180.1 s         22.2 s          3.6 s
+   1e-05         31,028,390,255          5.0 h      2,224.9 s        362.7 s
+   1e-06      3,102,839,025,470         20.8 d          2.6 d         10.1 h
+wrote fig_methods_sp100_normal_de_light.png
+wrote fig_methods_sp100_normal_de_dark.png
+wrote fig_methods_sp100_normal_en_light.png
+wrote fig_methods_sp100_normal_en_dark.png
+wrote fig_baseline_t_de_light.png
+wrote fig_baseline_t_de_dark.png
+wrote fig_baseline_t_en_light.png
+wrote fig_baseline_t_en_dark.png
+
+     eps             N required         1 core       14 cores        reduced
+    0.01                216,108       128.5 ms        15.1 ms         4.8 ms
+   0.001             21,610,831         12.9 s          1.5 s       482.4 ms
+  0.0001          2,161,083,132      1,285.0 s        150.5 s         48.2 s
+   1e-05        216,108,313,246          1.5 d          4.2 h          1.3 h
+   1e-06     21,610,831,324,566        148.7 d         17.4 d          5.6 d
+wrote fig_methods_sp100_t_de_light.png
+wrote fig_methods_sp100_t_de_dark.png
+wrote fig_methods_sp100_t_en_light.png
+wrote fig_methods_sp100_t_en_dark.png
+== done | 2026-09-24 10:58:09 | load averages: 6.49 4.46 3.33

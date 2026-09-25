@@ -1,0 +1,18 @@
+{
+  "IQM Garnet": {
+    "mlae": 0.03519854625489347,
+    "k0_only": 0.123
+  },
+  "IQM Emerald": {
+    "mlae": 0.03252830881185133,
+    "k0_only": 0.116
+  },
+  "Rigetti Cepheus-1": {
+    "mlae": 0.4909291488664946,
+    "k0_only": 0.193
+  },
+  "IonQ Forte Enterprise 1": {
+    "mlae": 0.04871299366534658,
+    "k0_only": 0.095
+  }
+}

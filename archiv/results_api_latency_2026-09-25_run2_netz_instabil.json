@@ -1,0 +1,81 @@
+{
+  "timestamp": "2026-09-25T13:09:26+0200",
+  "reps": 15,
+  "rows": [
+    {
+      "region": "eu-north-1",
+      "site": "Stockholm",
+      "device": "iqm/Garnet",
+      "handshake_ms": {
+        "median": 262.2123330074828,
+        "min": 147.9056660027709
+      },
+      "api_ms": {
+        "median": 762.3567499977071,
+        "min": 414.86887499922886,
+        "p90": 2038.4683750162367,
+        "max": 2545.8395830064546
+      }
+    },
+    {
+      "region": "eu-north-1",
+      "site": "Stockholm",
+      "device": "aqt/Ibex-Q1",
+      "handshake_ms": {
+        "median": 262.2123330074828,
+        "min": 147.9056660027709
+      },
+      "api_ms": {
+        "median": 211.5847500099335,
+        "min": 162.95483300928026,
+        "p90": 903.7536660034675,
+        "max": 906.7047080025077
+      }
+    },
+    {
+      "region": "us-east-1",
+      "site": "N. Virginia",
+      "device": "ionq/Forte-Enterprise-1",
+      "handshake_ms": {
+        "median": 317.6384999824222,
+        "min": 274.0131670143455
+      },
+      "api_ms": {
+        "median": 550.8945839828812,
+        "min": 332.496415998321,
+        "p90": 985.4304170003161,
+        "max": 1568.0951249960344
+      }
+    },
+    {
+      "region": "us-west-1",
+      "site": "N. California",
+      "device": "rigetti/Cepheus-1-108Q",
+      "handshake_ms": {
+        "median": 462.973708024947,
+        "min": 417.6032090035733
+      },
+      "api_ms": {
+        "median": 2207.017500011716,
+        "min": 2040.311125019798,
+        "p90": 2772.09195800242,
+        "max": 2903.4760419745
+      }
+    },
+    {
+      "region": "us-west-2",
+      "site": "Oregon",
+      "device": "sim:amazon/sv1",
+      "handshake_ms": {
+        "median": 461.18683301028796,
+        "min": 429.9566669797059
+      },
+      "api_ms": {
+        "median": 293.4471660119016,
+        "min": 261.2500000104774,
+        "p90": 365.3052080189809,
+        "max": 418.0636249948293
+      }
+    }
+  ]
+}

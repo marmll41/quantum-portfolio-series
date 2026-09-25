@@ -1,0 +1,26 @@
+# environments and caches
+.venv/
+jlenv/
+__pycache__/
+*.pyc
+.DS_Store
+
+# raw market data: Yahoo Finance prices and SPDR holdings file are not ours to
+# redistribute. fetch_sp100.py rebuilds them; only derived data is published.
+data/raw/
+
+# generated binary model for the Julia port (rebuilt by export_model.py)
+model.bin
+
+# unredacted copies with the real AWS account ID (task ARNs) -- local only
+*.private.json
+*.private.txt
+
+# article texts and their Medium exports are published on Medium, not here
+article-*.md
+artikel-*.md
+medium/
+
+# figures belong to the articles on Medium; plot_*.py regenerate them
+fig_*.png
+archiv/fig_*.png

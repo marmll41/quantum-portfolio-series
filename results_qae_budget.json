@@ -1,0 +1,114 @@
+{
+  "n": 10,
+  "shots": 400,
+  "eps": 0.001,
+  "schedule": [
+    0,
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    128,
+    256
+  ],
+  "oracle_calls": 412800,
+  "measured_relerr": 0.0008457818835003616,
+  "deepest_two_qubit": 597594,
+  "deepest_depth": 1061139,
+  "total_two_qubit": 480708000,
+  "total_layers": 853870800,
+  "mc_samples_same_eps": 99789272.67191954,
+  "gate_time_s": {
+    "IQM 20-40 ns": [
+      2e-08,
+      4e-08
+    ],
+    "IonQ Forte (Braket)": [
+      0.00097,
+      0.00097
+    ]
+  },
+  "time": {
+    "IQM 20-40 ns": {
+      "deepest_shot_s": [
+        0.02122278,
+        0.04244556
+      ],
+      "all_shots_s": [
+        17.077416,
+        34.154832
+      ]
+    },
+    "IonQ Forte (Braket)": {
+      "deepest_shot_s": [
+        1029.30483,
+        1029.30483
+      ],
+      "all_shots_s": [
+        828254.6760000001,
+        828254.6760000001
+      ]
+    }
+  },
+  "survival_deepest": {
+    "0.001": 2.1795704823282385e-260,
+    "0.005": 0.0,
+    "0.01": 0.0
+  },
+  "max_gates_for_half": {
+    "0.001": 692.8005491785009,
+    "0.005": 138.28257298606096,
+    "0.01": 68.96756393652849
+  },
+  "device_file": "data/braket_devices_2026-09-24.json",
+  "devices": {
+    "IQM Emerald": {
+      "error": 0.0030082766954917517,
+      "gates_50pct": 230.0666254608961,
+      "max_k_n3": 2,
+      "survival_one_step_n10": 0.0008939606260001415,
+      "survival_state_prep_n3": 0.9820855425024279,
+      "survival_A_n3": 0.9246563934405158
+    },
+    "IQM Garnet": {
+      "error": 0.004800347772108804,
+      "gates_50pct": 144.04834928330652,
+      "max_k_n3": 1,
+      "survival_one_step_n10": 1.3514572355808808e-05,
+      "survival_state_prep_n3": 0.9715413590772004,
+      "survival_A_n3": 0.8824002148003296
+    },
+    "Rigetti Cepheus": {
+      "error": 0.012510474002934036,
+      "gates_50pct": 55.05804840162997,
+      "max_k_n3": 0,
+      "survival_one_step_n10": 1.822720549226612e-13,
+      "survival_state_prep_n3": 0.9272460402079864,
+      "survival_A_n3": 0.7208500704031626
+    },
+    "IonQ Forte": {
+      "error": 0.03380000000000005,
+      "gates_50pct": 20.158753360795103,
+      "max_k_n3": null,
+      "survival_one_step_n10": 1.607634215128546e-35,
+      "survival_state_prep_n3": 0.8135836249000769,
+      "survival_A_n3": 0.4090184154480496
+    },
+    "hypothetical 0.1%": {
+      "error": 0.001,
+      "gates_50pct": 692.8005491785009,
+      "max_k_n3": 9,
+      "survival_one_step_n10": 0.09718238800964599,
+      "survival_state_prep_n3": 0.994014980014994,
+      "survival_A_n3": 0.9743224148844496
+    }
+  },
+  "classical": {
+    "one_dim_1core_s": 1.1663326533346725,
+    "full_14core_throughput_s": 7.155320777792944,
+    "full_14core_end_to_end_rate_s": 8.62022796566567
+  }
+}

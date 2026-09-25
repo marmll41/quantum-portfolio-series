@@ -1,0 +1,68 @@
+{
+  "queried": "2026-09-24",
+  "source": "AWS Braket GetDevice (device properties as reported by the providers)",
+  "devices": {
+    "IQM Emerald": {
+      "status": "ONLINE",
+      "updatedAt": "2026-09-24T05:13:36.143052+00:00",
+      "gate": "CZ",
+      "method": "interleaved RB",
+      "pairs": 85,
+      "fidelity_median": 0.9969917233045082,
+      "fidelity_best": 0.9988028819844949,
+      "fidelity_worst": 0.8985694436203432
+    },
+    "IQM Garnet": {
+      "status": "ONLINE",
+      "updatedAt": "2026-09-24T02:29:02.956264+00:00",
+      "gate": "CZ",
+      "method": "interleaved RB",
+      "pairs": 30,
+      "fidelity_median": 0.9951996522278912,
+      "fidelity_best": 0.9981512887572012,
+      "fidelity_worst": 0.987025328594615
+    },
+    "Rigetti Cepheus": {
+      "status": "ONLINE",
+      "updatedAt": "2026-09-24T11:32:03+00:00",
+      "gate": "CZ",
+      "method": "interleaved RB",
+      "pairs": 193,
+      "fidelity_median": 0.987489525997066,
+      "fidelity_best": 0.9970011569887236,
+      "fidelity_worst": 0.5
+    },
+    "IonQ Forte": {
+      "status": "OFFLINE",
+      "updatedAt": "2026-08-24T00:00:00+00:00",
+      "fidelity_mean_2q": 0.9662,
+      "timing_s": {
+        "T1": 100.0,
+        "T2": 1.0,
+        "1Q": 0.00013,
+        "2Q": 0.00097,
+        "readout": 0.00015,
+        "reset": 5e-05
+      }
+    },
+    "IonQ Forte Enterprise 1": {
+      "status": "ONLINE",
+      "updatedAt": "2026-09-23T00:00:00+00:00",
+      "fidelity_mean_2q": 0.9916,
+      "timing_s": {
+        "T1": 188.0,
+        "T2": 0.95,
+        "1Q": 6.3e-05,
+        "2Q": 0.00065,
+        "readout": 0.00025,
+        "reset": 0.00015
+      }
+    },
+    "AQT IBEX Q1": {
+      "status": "ONLINE",
+      "updatedAt": "2026-09-24T10:39:16+00:00",
+      "fidelity_mean_2q": 0.9784999999999999,
+      "two_qubit_gate_duration_s": 0.000335
+    }
+  }
+}

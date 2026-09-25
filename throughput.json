@@ -1,0 +1,34 @@
+{
+  "cpu": "Apple M3 Max",
+  "cpu_count": 14,
+  "universe": "sp100",
+  "dist": "normal",
+  "n": 20000000,
+  "rows": [
+    {
+      "workers": 1,
+      "time_median_s": 11.539692749996902,
+      "paths_per_s": 1733148.3977340185
+    },
+    {
+      "workers": 2,
+      "time_median_s": 5.93699249997735,
+      "paths_per_s": 3368708.9886127193
+    },
+    {
+      "workers": 4,
+      "time_median_s": 3.2352596249838825,
+      "paths_per_s": 6181884.089163211
+    },
+    {
+      "workers": 8,
+      "time_median_s": 1.916060165996896,
+      "paths_per_s": 10438085.585686352
+    },
+    {
+      "workers": 14,
+      "time_median_s": 1.4340861670207232,
+      "paths_per_s": 13946163.389574757
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+{"julia": "1.12.6", "threads": 1, "blas": "Accelerate", "block": 256, "n": 3102840, "reps": 20, "compile_s": 0.2684, "time_median_s": 1.347233, "time_min_s": 1.333962, "relerr_cvar": 1.056266e-03}

@@ -1,0 +1,22 @@
+== t-ext start Thu Sep 24 09:45:17 CEST 2026 |  9:45  up 27 days,  7:32, 1 user, load averages: 5.18 4.05 3.77
+CVaR@99% truth = 0.04979120   reps=20   pin=1
+
+         full  N=        16  relerr=5.276e-01  t=0.0001s
+         full  N=        32  relerr=4.399e-01  t=0.0001s
+         full  N=        64  relerr=3.658e-01  t=0.0001s
+         full  N=       128  relerr=3.012e-01  t=0.0001s
+         full  N=       256  relerr=2.517e-01  t=0.0002s
+         full  N=       512  relerr=1.584e-01  t=0.0003s
+         full  N=     1,024  relerr=1.768e-01  t=0.0006s
+         full  N=     2,048  relerr=1.054e-01  t=0.0011s
+         full  N=     4,096  relerr=7.880e-02  t=0.0022s
+         full  N=     8,192  relerr=5.382e-02  t=0.0044s
+         full  N=    16,384  relerr=3.444e-02  t=0.0094s
+         full  N=    32,768  relerr=2.529e-02  t=0.0196s
+         full  N=    65,536  relerr=2.180e-02  t=0.0392s
+         full  N=   131,072  relerr=1.220e-02  t=0.0782s
+         full  N=   262,144  relerr=1.004e-02  t=0.1566s
+         full  N=   524,288  relerr=7.109e-03  t=0.3135s
+         full  N= 1,048,576  relerr=4.826e-03  t=0.6269s
+         full  N= 2,097,152  relerr=3.665e-03  t=1.2505s
+         full  N= 4,194,304  relerr=1.950e-03  t=2.5125s

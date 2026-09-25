@@ -1,0 +1,112 @@
+[
+  {
+    "n": 3,
+    "qubits": 6,
+    "grid_points": 8,
+    "bin_width_rel_var": 0.44131486245505197,
+    "a_discrete": 0.0013183102948453017,
+    "A_two_qubit": 26,
+    "A_depth": 16,
+    "Q_two_qubit": 70,
+    "Q_depth": 35
+  },
+  {
+    "n": 4,
+    "qubits": 8,
+    "grid_points": 16,
+    "bin_width_rel_var": 0.2206574312275261,
+    "a_discrete": 0.006178385438221743,
+    "A_two_qubit": 46,
+    "A_depth": 37,
+    "Q_two_qubit": 122,
+    "Q_depth": 77
+  },
+  {
+    "n": 5,
+    "qubits": 10,
+    "grid_points": 32,
+    "bin_width_rel_var": 0.11032871561376305,
+    "a_discrete": 0.006178385438221744,
+    "A_two_qubit": 62,
+    "A_depth": 66,
+    "Q_two_qubit": 166,
+    "Q_depth": 135
+  },
+  {
+    "n": 6,
+    "qubits": 12,
+    "grid_points": 64,
+    "bin_width_rel_var": 0.05516435780688141,
+    "a_discrete": 0.008743357679896271,
+    "A_two_qubit": 118,
+    "A_depth": 139,
+    "Q_two_qubit": 290,
+    "Q_depth": 281
+  },
+  {
+    "n": 7,
+    "qubits": 14,
+    "grid_points": 128,
+    "bin_width_rel_var": 0.027582178903440818,
+    "a_discrete": 0.008743357679896273,
+    "A_two_qubit": 182,
+    "A_depth": 264,
+    "Q_two_qubit": 430,
+    "Q_depth": 531
+  },
+  {
+    "n": 8,
+    "qubits": 16,
+    "grid_points": 256,
+    "bin_width_rel_var": 0.013791089451720409,
+    "a_discrete": 0.009514412961100588,
+    "A_two_qubit": 334,
+    "A_depth": 529,
+    "Q_two_qubit": 746,
+    "Q_depth": 1061
+  },
+  {
+    "n": 9,
+    "qubits": 18,
+    "grid_points": 512,
+    "bin_width_rel_var": 0.006895544725860204,
+    "a_discrete": 0.009921690805876862,
+    "A_two_qubit": 602,
+    "A_depth": 1046,
+    "Q_two_qubit": 1294,
+    "Q_depth": 2095
+  },
+  {
+    "n": 10,
+    "qubits": 20,
+    "grid_points": 1024,
+    "bin_width_rel_var": 0.003447772362929992,
+    "a_discrete": 0.00992169080587686,
+    "A_two_qubit": 1114,
+    "A_depth": 2067,
+    "Q_two_qubit": 2330,
+    "Q_depth": 4137
+  },
+  {
+    "n": 11,
+    "qubits": 22,
+    "grid_points": 2048,
+    "bin_width_rel_var": 0.001723886181465106,
+    "a_discrete": 0.00992169080587686,
+    "A_two_qubit": 2138,
+    "A_depth": 4112,
+    "Q_two_qubit": 4390,
+    "Q_depth": 8227
+  },
+  {
+    "n": 12,
+    "qubits": 24,
+    "grid_points": 4096,
+    "bin_width_rel_var": 0.0008619430907324429,
+    "a_discrete": 0.009921690805876864,
+    "A_two_qubit": 4186,
+    "A_depth": 8203,
+    "Q_two_qubit": 8498,
+    "Q_depth": 16409
+  }
+]

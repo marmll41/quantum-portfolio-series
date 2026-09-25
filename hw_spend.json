@@ -1,0 +1,7 @@
+{
+  "source": "Braket SearchSpendingLimits, totalSpend per device, read 24.09.2026 (IQM, Rigetti) and 25.09.2026 (IonQ)",
+  "before": {"Garnet": 14.685, "Emerald": 0.0, "Cepheus-1-108Q": 0.0, "Forte-Enterprise-1": 0.0},
+  "after":  {"Garnet": 19.935, "Emerald": 5.7, "Cepheus-1-108Q": 2.175, "Forte-Enterprise-1": 48.9},
+  "booked_for_this_experiment": {"Garnet": 5.25, "Emerald": 5.7, "Cepheus-1-108Q": 2.175, "Forte-Enterprise-1": 48.9},
+  "note": "Spending-limit counters, not an invoice."
+}

@@ -1,0 +1,1 @@
+{"julia": "1.12.6", "threads": 1, "blas": "libopenblas64_p-r0.3.33.dylib", "block": 256, "n": 3102840, "reps": 20, "compile_s": 0.2700, "time_median_s": 2.484676, "time_min_s": 2.462606, "relerr_cvar": 1.056266e-03}
