@@ -17,12 +17,12 @@ Plan (variant C):   k = 0, 1, 2  x  1,000 shots  on IQM Garnet, IQM Emerald,
                     Rigetti Cepheus-1;  x 200 shots on IonQ Forte.
 
 Commands (nothing is sent to a QPU without --submit):
-    python hw_qae.py check         # lowered circuits vs. theory, gate counts
-    python hw_qae.py preview       # density-matrix simulation with the
+    python python/hw_qae.py check         # lowered circuits vs. theory, gate counts
+    python python/hw_qae.py preview       # density-matrix simulation with the
                                    # device error rates, what to expect
-    python hw_qae.py cost          # cost per task, total, spending limits
-    python hw_qae.py submit --max-usd 70 --submit
-    python hw_qae.py collect       # fetch results of submitted tasks
+    python python/hw_qae.py cost          # cost per task, total, spending limits
+    python python/hw_qae.py submit --max-usd 70 --submit
+    python python/hw_qae.py collect       # fetch results of submitted tasks
 
 Prices: AWS Braket on-demand pricing page, checked 24.09.2026.
 """

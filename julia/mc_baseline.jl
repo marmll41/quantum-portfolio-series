@@ -10,7 +10,7 @@
 # correlation step is L * Z.
 #
 # Usage:
-#   julia -t 14 mc_baseline.jl N [reps] [block]
+#   julia -t 14 julia/mc_baseline.jl N [reps] [block]
 #
 # BLAS is pinned to one thread; parallelism comes from Julia threads, each
 # with its own RNG and its own buffers. Timings exclude JIT compilation
@@ -25,7 +25,7 @@ if get(ENV, "JL_BLAS", "openblas") == "accelerate"
     using AppleAccelerate
 end
 
-function load_model(path = joinpath(@__DIR__, "model.bin"))
+function load_model(path = joinpath(@__DIR__, "..", "model.bin"))
     raw = reinterpret(Float64, read(path))
     d = Int(raw[1]); truth = raw[2]
     mu = raw[3:2+d]; w = raw[3+d:2+2d]

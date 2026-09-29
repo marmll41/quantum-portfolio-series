@@ -30,9 +30,9 @@ Design notes
 
 Usage
 -----
-    python mc_baseline.py --quick        # fast smoke run
-    python mc_baseline.py                # default grid
-    python mc_baseline.py --max-n 1e8    # include the large end
+    python python/mc_baseline.py --quick        # fast smoke run
+    python python/mc_baseline.py                # default grid
+    python python/mc_baseline.py --max-n 1e8    # include the large end
 """
 
 from __future__ import annotations
@@ -97,7 +97,7 @@ class Model:
 
 UNIVERSE = os.environ.get("MC_UNIVERSE", "sp100")   # sp100 | synthetic
 DIST = os.environ.get("MC_DIST", "normal")          # normal | t
-SP100_FILE = Path(__file__).parent / "data" / "sp100_model.npz"
+SP100_FILE = Path(__file__).resolve().parent.parent / "data" / "sp100_model.npz"
 
 
 def build_model(universe: str | None = None, dist: str | None = None) -> Model:

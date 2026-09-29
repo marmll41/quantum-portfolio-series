@@ -14,7 +14,7 @@ script turns an article into
 Images do not travel through the clipboard into Medium; the HTML marks each
 spot with a grey box naming the file to upload there.
 
-    python medium_export.py article-01-methodology.md
+    python python/medium_export.py article-01-methodology.md
 """
 
 from __future__ import annotations

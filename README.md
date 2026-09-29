@@ -8,7 +8,7 @@ series measures one thing throughout: **wall-clock time to a target accuracy
 ε** — not sample counts, not oracle calls.
 
 The articles and their figures are published on Medium. This repository holds
-everything needed to reproduce the numbers; the `plot_*.py` scripts regenerate
+everything needed to reproduce the numbers; the `python/plot_*.py` scripts regenerate
 every figure from the data here.
 
 ## The series
@@ -92,12 +92,12 @@ All decisions are commented in the code.
 3. **BLAS threads pinned** (`MC_PIN_THREADS=1`) and logged.
 4. **Exact error constant.** N(ε) for plain Monte Carlo comes from the
    asymptotic variance of the CVaR estimator
-   (`mc_baseline.cvar_error_constant`: C = 1.76 normal, 4.65 t), not from a
+   (`python/mc_baseline.py`, `cvar_error_constant`: C = 1.76 normal, 4.65 t), not from a
    fit. For quasi-MC and importance sampling: fit, then a calibration run of
    100 replications near the fitted N, corrected along the local slope.
 5. **Direct timing** at the final N, 20 rounds, the Python methods
    interleaved; Julia separately, 20 repetitions each.
-6. **Predictions before hardware runs.** `hw_qae.py preview` simulates the
+6. **Predictions before hardware runs.** `python/hw_qae.py preview` simulates the
    circuits with the error rates the providers report, before anything is
    submitted.
 
@@ -106,6 +106,10 @@ importance sampling and quasi-MC shrink further. Selecting today's largest
 companies is a survivorship bias (harmless for a compute-time benchmark).
 One machine, one day; the load average per step is in `benchmark.log`.
 
+## Layout
+
+Code is grouped by language: `python/` (models, measurements, plots, Medium export), `julia/` (Julia port of the baseline), `shell/` (the complete measurement chain). Data and results stay at the top level and in `data/`. Run every command from the repository root; the scripts read and write their files relative to it.
+
 ## Reproduce
 
 ```bash
@@ -113,28 +117,28 @@ python3 -m venv .venv && ./.venv/bin/pip install numpy scipy matplotlib amazon-b
 
 # once, with network: build the model (stores derived quantities only)
 ./.venv/bin/pip install yfinance pandas openpyxl
-./.venv/bin/python fetch_sp100.py
+./.venv/bin/python python/fetch_sp100.py
 
 # articles 2 and 2b: full measurement, both distributions, figures
-./run_benchmarks.sh
+./shell/run_benchmarks.sh
 
 # article 3: local simulator and control-plane latency (free, read-only calls)
-./.venv/bin/python probe_local.py
-AWS_PROFILE=<your-profile> ./.venv/bin/python probe_api_latency.py
+./.venv/bin/python python/probe_local.py
+AWS_PROFILE=<your-profile> ./.venv/bin/python python/probe_api_latency.py
 
 # article 5: QAE on the local simulator (free)
-./.venv/bin/python qae_tail.py validate
-./.venv/bin/python qae_tail.py scaling 400
-./.venv/bin/python qae_tail.py resources
-./.venv/bin/python qae_tail.py budget
+./.venv/bin/python python/qae_tail.py validate
+./.venv/bin/python python/qae_tail.py scaling 400
+./.venv/bin/python python/qae_tail.py resources
+./.venv/bin/python python/qae_tail.py budget
 
 # article 6: hardware (free steps first; submitting costs money)
-./.venv/bin/python hw_qae.py check
-./.venv/bin/python hw_qae.py preview
-./.venv/bin/python hw_qae.py cost
+./.venv/bin/python python/hw_qae.py check
+./.venv/bin/python python/hw_qae.py preview
+./.venv/bin/python python/hw_qae.py cost
 ```
 
-`hw_qae.py submit` refuses to run without `--submit` and a `--max-usd`
+`python/hw_qae.py submit` refuses to run without `--submit` and a `--max-usd`
 ceiling above the planned cost, and it skips offline devices. Set a spending
 limit per device in the Braket console first.
 
@@ -142,20 +146,20 @@ limit per device in the Braket console first.
 
 | File | Content |
 |---|---|
-| `fetch_sp100.py` | Loads holdings and prices, estimates covariance and ν |
+| `python/fetch_sp100.py` | Loads holdings and prices, estimates covariance and ν |
 | `data/sp100_model.npz`, `.json` | Derived model (tickers, weights, μ, Σ, ν) |
 | `data/braket_devices_2026-09-24.json` | Device error rates and timing as reported through Braket |
-| `mc_baseline.py` | Model, estimator, exact reference and error constant |
-| `mc_variance_reduction.py`, `retime_variance_reduction.py` | Quasi-MC, importance sampling, calibration, interleaved timing |
-| `throughput_probe.py` | Multi-core scaling with a persistent pool |
-| `mc_baseline.jl`, `export_model.py` | Julia port on the identical model |
-| `run_benchmarks.sh` | Complete measurement chain with log |
-| `probe_local.py`, `probe_api_latency.py` | Article 3: local simulator, control-plane latency |
-| `loop_core.py`, `hybrid_entry.py`, `article4_*.json` | Article 4: latency loop, Hybrid Job entry point, raw data |
-| `qae_tail.py` | Article 5: QAE from standard gates, scaling, resources, budget |
-| `hw_qae.py`, `hw_tasks.json`, `hw_spend.json` | Article 6: hardware runs, results, spending-limit counters |
-| `plot_*.py` | Regenerate all figures (DE/EN, light/dark) |
-| `medium_export.py` | Turns an article into Medium-ready HTML with tables as images |
+| `python/mc_baseline.py` | Model, estimator, exact reference and error constant |
+| `python/mc_variance_reduction.py`, `python/retime_variance_reduction.py` | Quasi-MC, importance sampling, calibration, interleaved timing |
+| `python/throughput_probe.py` | Multi-core scaling with a persistent pool |
+| `julia/mc_baseline.jl`, `python/export_model.py` | Julia port on the identical model |
+| `shell/run_benchmarks.sh` | Complete measurement chain with log |
+| `python/probe_local.py`, `python/probe_api_latency.py` | Article 3: local simulator, control-plane latency |
+| `python/loop_core.py`, `python/hybrid_entry.py`, `article4_*.json` | Article 4: latency loop, Hybrid Job entry point, raw data |
+| `python/qae_tail.py` | Article 5: QAE from standard gates, scaling, resources, budget |
+| `python/hw_qae.py`, `hw_tasks.json`, `hw_spend.json` | Article 6: hardware runs, results, spending-limit counters |
+| `python/plot_*.py` | Regenerate all figures (DE/EN, light/dark) |
+| `python/medium_export.py` | Turns an article into Medium-ready HTML with tables as images |
 | `results_*.json`, `throughput*.json`, `julia_*.json`, `benchmark.log` | Raw results |
 | `archiv/` | First version (synthetic model) and discarded runs, with notes |
 | `quellen-dossier.md`, `ergebnisse-speedup.md` | Source dossier and result notes (German) |
@@ -165,5 +169,5 @@ limit per device in the Braket console first.
 Code (`*.py`, `*.jl`, `*.sh`): [MIT](LICENSE).
 Documentation and result data: [CC BY 4.0](LICENSE-CONTENT.md).
 Not included: raw prices and ETF holdings (`data/raw/`), which
-`fetch_sp100.py` downloads again; the AWS account ID is replaced by
+`python/fetch_sp100.py` downloads again; the AWS account ID is replaced by
 `<account-id>` in all task ARNs.

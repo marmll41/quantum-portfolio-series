@@ -27,9 +27,9 @@ Estimation: maximum-likelihood QAE (Suzuki et al., Quantum Inf. Process. 19,
 75 (2020)) with the exponentially incremented schedule k = 0, 1, 2, 4, ...
 
 Usage:
-    python qae_tail.py validate     # circuits vs. sin^2((2k+1)theta)
-    python qae_tail.py scaling      # error vs. oracle calls, MLAE vs. MC
-    python qae_tail.py resources    # gate counts, depth, time, fidelity
+    python python/qae_tail.py validate     # circuits vs. sin^2((2k+1)theta)
+    python python/qae_tail.py scaling      # error vs. oracle calls, MLAE vs. MC
+    python python/qae_tail.py resources    # gate counts, depth, time, fidelity
 """
 
 from __future__ import annotations

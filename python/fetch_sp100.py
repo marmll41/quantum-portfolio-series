@@ -50,7 +50,7 @@ START, END = "2021-09-23", "2026-09-24"      # yfinance end is exclusive
 N_ASSETS = 100
 MIN_COVERAGE = 0.99                          # share of trading days required
 
-DATA = Path(__file__).parent / "data"
+DATA = Path(__file__).resolve().parent.parent / "data"
 RAW = DATA / "raw"
 
 

@@ -34,9 +34,9 @@ The numbers here are an upper bound on what the techniques deliver.
 
 Usage
 -----
-    python mc_variance_reduction.py --quick
-    python mc_variance_reduction.py                 # full grid, ~10 min
-    python mc_variance_reduction.py --workers 14    # + multi-core timing
+    python python/mc_variance_reduction.py --quick
+    python python/mc_variance_reduction.py                 # full grid, ~10 min
+    python python/mc_variance_reduction.py --workers 14    # + multi-core timing
 """
 
 from __future__ import annotations
