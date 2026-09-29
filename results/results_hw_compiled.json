@@ -1,0 +1,98 @@
+[
+  {
+    "device": "IQM Garnet",
+    "k": 0,
+    "native_2q": 21,
+    "gate_types": [
+      "cz"
+    ],
+    "phys_qubits": 6
+  },
+  {
+    "device": "IQM Garnet",
+    "k": 1,
+    "native_2q": 86,
+    "gate_types": [
+      "cz"
+    ],
+    "phys_qubits": 6
+  },
+  {
+    "device": "IQM Garnet",
+    "k": 2,
+    "native_2q": 158,
+    "gate_types": [
+      "cz"
+    ],
+    "phys_qubits": 6
+  },
+  {
+    "device": "IQM Emerald",
+    "k": 0,
+    "native_2q": 19,
+    "gate_types": [
+      "cz"
+    ],
+    "phys_qubits": 6
+  },
+  {
+    "device": "IQM Emerald",
+    "k": 1,
+    "native_2q": 86,
+    "gate_types": [
+      "cz"
+    ],
+    "phys_qubits": 6
+  },
+  {
+    "device": "IQM Emerald",
+    "k": 2,
+    "native_2q": 145,
+    "gate_types": [
+      "cz"
+    ],
+    "phys_qubits": 7
+  },
+  {
+    "device": "Rigetti Cepheus-1",
+    "k": 0,
+    "native_2q": 23,
+    "gate_types": [
+      "cz"
+    ],
+    "phys_qubits": 6
+  },
+  {
+    "device": "Rigetti Cepheus-1",
+    "k": 1,
+    "native_2q": 92,
+    "gate_types": [
+      "cz"
+    ],
+    "phys_qubits": 6
+  },
+  {
+    "device": "Rigetti Cepheus-1",
+    "k": 2,
+    "native_2q": 158,
+    "gate_types": [
+      "cz"
+    ],
+    "phys_qubits": 6
+  },
+  {
+    "device": "IonQ Forte Enterprise 1",
+    "k": 0,
+    "sharpened": false
+  },
+  {
+    "device": "IonQ Forte Enterprise 1",
+    "k": 1,
+    "sharpened": false
+  },
+  {
+    "device": "IonQ Forte Enterprise 1",
+    "k": 2,
+    "sharpened": false
+  }
+]

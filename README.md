@@ -21,7 +21,7 @@ every figure from the data here.
 | 3 | A Factor of 188 | Braket setup, device availability, control-plane latency, spending limits |
 | 4 | The Quantum Computer Is the Fastest Part | Where the time of a quantum loop goes |
 | 5 | 412,800 Oracle Calls | Quantum amplitude estimation from standard gates: speedup, constant, cost |
-| 6 | 106 CNOTs | The smallest QAE circuit on IQM, Rigetti and IonQ hardware |
+| 6 | 106 CNOTs | The smallest non-trivial QAE circuit on IQM, Rigetti and IonQ hardware |
 
 ## Key results
 
@@ -159,6 +159,7 @@ limit per device in the Braket console first.
 | `python/loop_core.py`, `python/hybrid_entry.py`, `results/article4_*.json` | Article 4: latency loop, Hybrid Job entry point, raw data |
 | `python/qae_tail.py` | Article 5: QAE from standard gates, scaling, resources, budget |
 | `python/hw_qae.py`, `results/hw_tasks.json`, `results/hw_spend.json` | Article 6: hardware runs, results, spending-limit counters |
+| `results/results_hw_compiled.json` | Article 6: native two-qubit gate counts of the compiled circuits (IQM, Rigetti) |
 | `python/plot_*.py` | Regenerate all figures (DE/EN, light/dark) |
 | `python/medium_export.py` | Turns an article into Medium-ready HTML with tables as images |
 | `results/` | All measured results (`results_*.json`, `throughput*.json`, `julia_*.json`, `article4_*.json`, `hw_*.json`) and `benchmark.log` |

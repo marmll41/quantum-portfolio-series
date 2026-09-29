@@ -667,6 +667,37 @@ qubits ≈ the problem size of the Vanguard experiment, cheapest shot price,
 simulators on site). **eu-north-1** for article 5, because AQT IBEX-Q1 there
 is the only reachable trapped-ion device in the EU.
 
+## Literature check (2026-09-29)
+
+Before publication, a search for prior and overlapping work. Every entry was
+checked against the paper or its abstract; the articles cite them where
+indicated.
+
+| Source | What it adds | Article |
+|---|---|---|
+| Hoefler, Häner & Troyer, *Disentangling Hype from Practicality*, CACM 66(5), 2023, arXiv:2307.00523 | Same argument as the series, for any application: with a quadratic speedup even one operation per step gives crossover times of "several months"; Monte Carlo speedups listed as unlikely to reach advantage | 1 |
+| Stamatopoulos & Zeng, *Derivative Pricing using Quantum Signal Processing*, Quantum 8, 1322 (2024) | Update of Chakrabarti: 4.7k logical qubits, 10⁹ T gates at 45 MHz | 1 |
+| Hong & Liu, WSC 2011, Theorem 1; Trindade et al., J. Banking & Finance 31(11), 2007 | Actual source of the CVaR variance formula (Management Science 2009 is about sensitivities) | 2, code |
+| Glasserman, Heidelberger & Shahabuddin, Mathematical Finance 12(3), 2002 | IS with mean shift fails under multivariate t; remedy: twist the chi-square mixing variable, then shift conditionally; double-digit variance reduction incl. a 100-asset case | 2b |
+| Acworth, Broadie & Glasserman 1998; Papageorgiou & Paskov 1999; He & Wang, Math. Comp. 90, 2021 | PCA ordering; QMC for portfolio risk; RQMC convergence for expected shortfall | 2b |
+| STAC-A2 | Industry risk-compute benchmark, but Heston Greeks, not tail-risk time-to-accuracy | 2b |
+| quantumcomputingcost.com (O. Wakefield-Smith, 3 Jun 2026) | Braket per-shot spread "more than 180x" already published | 3 |
+| IBM Research blog, 120x speedup with Qiskit Runtime, 11 May 2021; Karalekas et al., Quantum Sci. Technol. 5, 024003 (2020) | Round trips, not the QPU, dominate variational loops | 4 |
+| AWS Braket Developer Guide, Hybrid Jobs | Main selling points are queue priority and parametric compilation, not colocation | 4 |
+| Labib, arXiv:2609.02715 (2026) | Best AE constants about 3/ε at 95% confidence; the series' MLAE comes to about 4 (absolute error × oracle calls) | 5 |
+| Lal et al., arXiv:2609.25992 (22 Sep 2026) | MLAE on IonQ Forte-1, ~113 device-hours, error floor 2–5 × 10⁻² | 5, 6 |
+| Woerner & Egger, npj QI 5, 15 (2019); Stamatopoulos et al., Quantum 4, 291 (2020) | QAE for VaR/CVaR; the circuit blueprint (IBM hardware, one Grover step, 18 CNOTs) | 5, 6 |
+| Tanaka et al., QIP 20, 293 (2021) | Depolarising noise damps the oscillation towards 1/2, built into MLAE | 6 |
+| Giurgica-Tiron et al., Phys. Rev. Research 4, 033034 (2022) | Low-depth AE on IonQ, >90 two-qubit gates, error ~10⁻² | 6 |
+| Borràs Espert et al. (BBVA), arXiv:2607.12990 (2026) | Signal resolved through k = 2 on IBM Heron with >1,000 two-qubit gates, with Q-CTRL error suppression — counterexample to "superconducting stops at two" | 6 |
+| Oralkhan & Zhaxalykov, arXiv:2601.05286 (2026) | Closest multi-vendor Braket comparison (Grover, GHZ, QFT, QAOA), not AE | 6 |
+
+Own follow-up measurements prompted by the check: the control-plane cross-check
+above, and the compiled gate counts for article 6
+(`results/results_hw_compiled.json`: logical 14/60/106 CNOTs become 19–23,
+86–92 and 145–158 native CZ gates on IQM and Rigetti; IonQ returns no
+compiled circuit; IonQ debiasing was off).
+
 ## Still to obtain
 
 - [ ] Iteration counts from Fig. 4–6 of the Vanguard paper (PDF figures)

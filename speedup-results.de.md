@@ -4,7 +4,7 @@
 
 Stand 24.09.2026, endgültige Messung. Frage: Lässt sich die klassische
 Baseline schlagen — mit einer schnelleren Sprache oder mit einer besseren
-Methode? Und was davon übersteht echte Daten und dicke Enden?
+Methode? Und was davon übersteht echte Daten und Fat Tails?
 
 ## Protokoll
 
@@ -38,7 +38,7 @@ Methode? Und was davon übersteht echte Daten und dicke Enden?
 2. **Methode: Faktor 9 bis 57** bei identischer Arbeit pro Pfad.
 3. **Importance Sampling ist nicht robust.** 57× unter Normalverteilung,
    1,1× unter t: Die Verschiebung der Faktoren erfasst nicht die
-   Mischvariable, die bei dicken Enden den Tail treibt.
+   Mischvariable, die bei Fat Tails den Tail treibt.
 4. **Quasi-MC ist robust:** 9× und 16–17× in beiden Verteilungen. Lokale
    Steigungen −0,54 bis −0,83 — teilweise klassisch „quadratisch".
 

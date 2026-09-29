@@ -663,6 +663,37 @@ Regionsaufteilung für die Serie: **us-west-1** als Arbeitspferd (Cepheus mit
 Simulatoren vor Ort). **eu-north-1** für Artikel 5, weil dort mit AQT IBEX-Q1
 die einzige erreichbare Ionenfalle in der EU steht.
 
+## Literaturprüfung (2026-09-29)
+
+Vor der Veröffentlichung eine Suche nach früheren und überlappenden Arbeiten.
+Jeder Eintrag wurde am Paper oder an seiner Zusammenfassung geprüft; die
+Artikel zitieren sie wie angegeben.
+
+| Quelle | Was sie beiträgt | Artikel |
+|---|---|---|
+| Hoefler, Häner & Troyer, *Disentangling Hype from Practicality*, CACM 66(5), 2023, arXiv:2307.00523 | Dasselbe Argument wie die Serie, für beliebige Anwendungen: Bei quadratischem Speedup führt schon eine Operation pro Schritt zu Crossover-Zeiten von „several months"; Monte-Carlo-Beschleunigung auf der Liste ohne absehbaren Vorteil | 1 |
+| Stamatopoulos & Zeng, *Derivative Pricing using Quantum Signal Processing*, Quantum 8, 1322 (2024) | Aktualisierung von Chakrabarti: 4.700 logische Qubits, 10⁹ T-Gates bei 45 MHz | 1 |
+| Hong & Liu, WSC 2011, Theorem 1; Trindade et al., J. Banking & Finance 31(11), 2007 | Eigentliche Quelle der CVaR-Varianzformel (Management Science 2009 behandelt Sensitivitäten) | 2, Code |
+| Glasserman, Heidelberger & Shahabuddin, Mathematical Finance 12(3), 2002 | IS mit Mittelwert-Verschiebung versagt unter multivariater t; Abhilfe: Chi-Quadrat-Mischvariable verschieben, dann bedingt verschieben; zweistellige Varianzreduktion, auch bei 100 Assets | 2b |
+| Acworth, Broadie & Glasserman 1998; Papageorgiou & Paskov 1999; He & Wang, Math. Comp. 90, 2021 | PCA-Reihenfolge; QMC für Portfoliorisiko; RQMC-Konvergenz für Expected Shortfall | 2b |
+| STAC-A2 | Branchen-Benchmark für Risikorechnung, aber Heston-Greeks, nicht Tail-Risiko bis zu einer Genauigkeit | 2b |
+| quantumcomputingcost.com (O. Wakefield-Smith, 3.6.2026) | Spanne der Shot-Preise auf Braket „more than 180x" bereits veröffentlicht | 3 |
+| IBM Research Blog, 120x Speedup mit Qiskit Runtime, 11.5.2021; Karalekas et al., Quantum Sci. Technol. 5, 024003 (2020) | Round-Trips, nicht die QPU, dominieren variationelle Schleifen | 4 |
+| AWS Braket Developer Guide, Hybrid Jobs | Hauptargumente sind Queue-Priorität und parametrische Kompilierung, nicht Colocation | 4 |
+| Labib, arXiv:2609.02715 (2026) | Beste AE-Konstanten etwa 3/ε bei 95 % Konfidenz; die MLAE der Serie kommt auf etwa 4 (absoluter Fehler × Orakel-Aufrufe) | 5 |
+| Lal et al., arXiv:2609.25992 (22.9.2026) | MLAE auf IonQ Forte-1, ~113 Gerätestunden, Fehlerboden 2–5 × 10⁻² | 5, 6 |
+| Woerner & Egger, npj QI 5, 15 (2019); Stamatopoulos et al., Quantum 4, 291 (2020) | QAE für VaR/CVaR; der Circuit-Bauplan (IBM-Hardware, ein Grover-Schritt, 18 CNOTs) | 5, 6 |
+| Tanaka et al., QIP 20, 293 (2021) | Depolarisierendes Rauschen dämpft die Schwingung gegen 1/2, in MLAE eingebaut | 6 |
+| Giurgica-Tiron et al., Phys. Rev. Research 4, 033034 (2022) | AE mit geringer Tiefe auf IonQ, >90 Zwei-Qubit-Gates, Fehler ~10⁻² | 6 |
+| Borràs Espert et al. (BBVA), arXiv:2607.12990 (2026) | Signal bis k = 2 auf IBM Heron mit >1.000 Zwei-Qubit-Gates, mit Fehlerunterdrückung von Q-CTRL — Gegenbeispiel zu „supraleitend endet nach zwei" | 6 |
+| Oralkhan & Zhaxalykov, arXiv:2601.05286 (2026) | Nächster Vergleich mehrerer Hersteller über Braket (Grover, GHZ, QFT, QAOA), keine AE | 6 |
+
+Eigene Nachmessungen, die die Prüfung ausgelöst hat: die Querprüfung der
+Control-Plane oben und die kompilierten Gate-Zahlen für Artikel 6
+(`results/results_hw_compiled.json`: aus 14/60/106 logischen CNOTs werden auf
+IQM und Rigetti 19–23, 86–92 und 145–158 native CZ-Gates; IonQ liefert keinen
+kompilierten Circuit; das Debiasing von IonQ war aus).
+
 ## Noch zu beschaffen
 
 - [ ] Iterationszahlen aus Fig. 4–6 der Vanguard-Arbeit (PDF-Grafiken)

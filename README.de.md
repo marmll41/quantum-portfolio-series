@@ -17,11 +17,11 @@ erzeugen jede Grafik aus den Daten hier neu.
 |---|---|---|
 | 1 | Die Uhr, die niemand gestartet hat | Warum Sample-Zahlen nichts über Geschwindigkeit sagen; sieben Fragen an jeden Benchmark |
 | 2 | 268 Millisekunden | Die klassische Baseline: CVaR der S&P-500-Top-100 per einfachem Monte Carlo |
-| 2b | 4,7 Millisekunden | Die Baseline schlagen: Julia, Quasi-Monte-Carlo, Importance Sampling, dicke Enden |
+| 2b | 4,7 Millisekunden | Die Baseline schlagen: Julia, Quasi-Monte-Carlo, Importance Sampling, Fat Tails |
 | 3 | Der Faktor 188 | Braket-Setup, Geräteverfügbarkeit, Control-Plane-Latenz, Spending Limits |
 | 4 | Der Quantencomputer ist der schnellste Teil | Wohin die Zeit einer Quanten-Schleife geht |
 | 5 | 412.800 Orakel-Aufrufe | Quantum Amplitude Estimation aus Standard-Gates: Speedup, Konstante, Kosten |
-| 6 | 106 CNOTs | Der kleinste QAE-Circuit auf Hardware von IQM, Rigetti und IonQ |
+| 6 | 106 CNOTs | Der kleinste nicht-triviale QAE-Circuit auf Hardware von IQM, Rigetti und IonQ |
 
 ## Kernergebnisse
 
@@ -162,6 +162,7 @@ in der Braket-Konsole pro Gerät ein Spending Limit setzen.
 | `python/loop_core.py`, `python/hybrid_entry.py`, `results/article4_*.json` | Artikel 4: Latenz-Schleife, Einstieg für den Hybrid Job, Rohdaten |
 | `python/qae_tail.py` | Artikel 5: QAE aus Standard-Gates, Skalierung, Ressourcen, Budget |
 | `python/hw_qae.py`, `results/hw_tasks.json`, `results/hw_spend.json` | Artikel 6: Hardware-Läufe, Ergebnisse, Zähler der Spending Limits |
+| `results/results_hw_compiled.json` | Artikel 6: native Zwei-Qubit-Gates der kompilierten Circuits (IQM, Rigetti) |
 | `python/plot_*.py` | Erzeugen alle Grafiken (DE/EN, hell/dunkel) |
 | `python/medium_export.py` | Macht aus einem Artikel eine Medium-taugliche HTML-Fassung mit Tabellen als Bild |
 | `results/` | Alle Messergebnisse (`results_*.json`, `throughput*.json`, `julia_*.json`, `article4_*.json`, `hw_*.json`) und `benchmark.log` |
