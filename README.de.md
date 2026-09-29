@@ -163,7 +163,7 @@ in der Braket-Konsole pro Gerät ein Spending Limit setzen.
 | `python/qae_tail.py` | Artikel 5: QAE aus Standard-Gates, Skalierung, Ressourcen, Budget |
 | `python/hw_qae.py`, `results/hw_tasks.json`, `results/hw_spend.json` | Artikel 6: Hardware-Läufe, Ergebnisse, Zähler der Spending Limits |
 | `results/results_hw_compiled.json` | Artikel 6: native Zwei-Qubit-Gates der kompilierten Circuits (IQM, Rigetti) |
-| `python/plot_*.py` | Erzeugen alle Grafiken (DE/EN, hell/dunkel) |
+| `python/plot_*.py` | Erzeugen alle Grafiken (DE/EN, hell/dunkel) und mit `plot_cover.py` die Titelbilder der Artikel (1920 × 1080) |
 | `python/medium_export.py` | Macht aus einem Artikel eine Medium-taugliche HTML-Fassung mit Tabellen als Bild |
 | `results/` | Alle Messergebnisse (`results_*.json`, `throughput*.json`, `julia_*.json`, `article4_*.json`, `hw_*.json`) und `benchmark.log` |
 | `source-dossier.md`, `source-dossier.de.md` | Quellen-Dossier (Englisch, Deutsch) |

@@ -160,7 +160,7 @@ limit per device in the Braket console first.
 | `python/qae_tail.py` | Article 5: QAE from standard gates, scaling, resources, budget |
 | `python/hw_qae.py`, `results/hw_tasks.json`, `results/hw_spend.json` | Article 6: hardware runs, results, spending-limit counters |
 | `results/results_hw_compiled.json` | Article 6: native two-qubit gate counts of the compiled circuits (IQM, Rigetti) |
-| `python/plot_*.py` | Regenerate all figures (DE/EN, light/dark) |
+| `python/plot_*.py` | Regenerate all figures (DE/EN, light/dark) and, with `plot_cover.py`, the article covers (1920 × 1080) |
 | `python/medium_export.py` | Turns an article into Medium-ready HTML with tables as images |
 | `results/` | All measured results (`results_*.json`, `throughput*.json`, `julia_*.json`, `article4_*.json`, `hw_*.json`) and `benchmark.log` |
 | `source-dossier.md`, `source-dossier.de.md` | Source dossier (English, German) |
