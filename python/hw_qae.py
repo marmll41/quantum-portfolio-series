@@ -60,7 +60,7 @@ DEVICES = {
                     "shots": 200, "per_shot": 0.0235},
 }
 PER_TASK = 0.30
-TASKS_FILE = "hw_tasks.json"
+TASKS_FILE = "results/hw_tasks.json"
 DEVICE_DATA = "data/braket_devices_2026-09-24.json"
 
 
@@ -153,7 +153,7 @@ def cmd_check():
     o = oracle()
     print(f"a = {o.dist['a']:.5f}, qubits used = {o.nqubits}")
     json.dump({"a": o.dist["a"], "circuits": rows},
-              open("results_hw_check.json", "w"), indent=2)
+              open("results/results_hw_check.json", "w"), indent=2)
 
 
 def noise_model_circuit(circ, p2, p1=1e-4, readout=0.0):
@@ -200,7 +200,7 @@ def cmd_preview():
     ideal = [math.sin((2 * k + 1) * oracle().theta) ** 2 for k in KS]
     print(f"{'ideal':28}               " + "  ".join(f"{x:.3f}" for x in ideal))
     out["ideal"] = ideal
-    json.dump(out, open("results_hw_preview.json", "w"), indent=2)
+    json.dump(out, open("results/results_hw_preview.json", "w"), indent=2)
 
 
 def plan():
@@ -245,7 +245,7 @@ def cmd_submit(args):
         sys.exit(f"planned ${total:.2f} exceeds --max-usd {max_usd}")
     from braket.aws import AwsDevice
     # new tasks go to the unredacted file; hw_tasks.json is the public copy
-    store = "hw_tasks.private.json" if os.path.exists("hw_tasks.private.json") \
+    store = "results/hw_tasks.private.json" if os.path.exists("results/hw_tasks.private.json") \
         else TASKS_FILE
     tasks = json.load(open(store)) if os.path.exists(store) else []
     for name, d in DEVICES.items():
@@ -270,7 +270,7 @@ def cmd_collect():
     hw_tasks.json has the AWS account ID in the ARNs replaced by <account-id>
     -- and skips tasks whose results are already stored."""
     from braket.aws import AwsQuantumTask
-    src = "hw_tasks.private.json" if os.path.exists("hw_tasks.private.json") \
+    src = "results/hw_tasks.private.json" if os.path.exists("results/hw_tasks.private.json") \
         else TASKS_FILE
     tasks = json.load(open(src))
     for t in tasks:

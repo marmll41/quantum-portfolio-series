@@ -47,5 +47,5 @@ if __name__ == "__main__":
                          capture_output=True, text=True).stdout.strip()
     json.dump({"timestamp": time.strftime("%Y-%m-%dT%H:%M:%S%z"), "cpu": cpu,
                "python": platform.python_version(), "rows": rows},
-              open("results_local_sim.json", "w"), indent=2)
+              open("results/results_local_sim.json", "w"), indent=2)
     print("\nwrote results_local_sim.json")

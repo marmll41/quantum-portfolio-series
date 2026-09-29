@@ -15,7 +15,7 @@ Methode? Und was davon übersteht echte Daten und dicke Enden?
   Kalibrierlauf mit 100 Replikationen
 - Direktes Timing beim endgültigen N, 20 Runden, verschachtelt
 - Apple M3 Max, 14 Kerne, ruhige Maschine (Hintergrundprogramme beendet);
-  Last je Schritt in `benchmark.log`
+  Last je Schritt in `results/benchmark.log`
 
 ## Ergebnis
 

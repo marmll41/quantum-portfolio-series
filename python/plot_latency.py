@@ -61,10 +61,10 @@ S = {
 
 
 def load():
-    lap = json.load(open("article4_laptop.json"))
-    hyb = json.load(open("article4_hybrid.json"))
-    gar = json.load(open("article4_garnet.json"))
-    fast = json.load(open("article4_garnet_fastpoll.json"))
+    lap = json.load(open("results/article4_laptop.json"))
+    hyb = json.load(open("results/article4_hybrid.json"))
+    gar = json.load(open("results/article4_garnet.json"))
+    fast = json.load(open("results/article4_garnet_fastpoll.json"))
     local = st.median(lap["local_ms"])
     vals = [local, hyb["median_ms"], st.median(lap["laptop_sv1_ms"]),
             st.median(gar["client_ms"])]

@@ -423,7 +423,7 @@ misst sich hiergegen.
 | 20 | 1.000 | **23,7 ms** | 23,7 |
 
 > **Aktualisiert 25.09.2026:** Artikel 3 nutzt die Wiederholung auf dem M3 Max
-> (`results_local_sim.json`): 3,7 / 5,6 / 9,2 / **16,8 ms**. Die Werte oben stammen vom
+> (`results/results_local_sim.json`): 3,7 / 5,6 / 9,2 / **16,8 ms**. Die Werte oben stammen vom
 > M3 Ultra (23.09.).
 
 ### Eigene Messung: Braket-Control-Plane-Latenz (2026-09-23)

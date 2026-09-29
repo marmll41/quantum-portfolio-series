@@ -297,7 +297,7 @@ def main():
     p.add_argument("--timing-reps", type=int, default=7)
     p.add_argument("--calib-reps", type=int, default=100)
     p.add_argument("--methods", default=",".join(METHODS))
-    p.add_argument("--out", default="results_variance_reduction.json")
+    p.add_argument("--out", default="results/results_variance_reduction.json")
     a = p.parse_args()
 
     reps = 5 if a.quick else a.reps

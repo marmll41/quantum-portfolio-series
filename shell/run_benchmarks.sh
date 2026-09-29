@@ -19,7 +19,7 @@ cd "$(dirname "$0")/.."
 
 WORKERS="${1:-$(sysctl -n hw.ncpu)}"
 PY=.venv/bin/python
-LOG=benchmark.log
+LOG=results/benchmark.log
 export MC_UNIVERSE=sp100
 
 stamp() { echo "== $* | $(date '+%F %T') | $(uptime | sed 's/.*load/load/')" | tee -a "$LOG"; }
@@ -33,25 +33,25 @@ for DIST in normal t; do
 
   stamp "$DIST: baseline error curve, 1 core"
   MC_PIN_THREADS=1 $PY python/mc_baseline.py --reps 20 --max-n 1e7 \
-      --out "results_1core$SUF.json" >> "$LOG" 2>&1
+      --out "results/results_1core$SUF.json" >> "$LOG" 2>&1
 
   stamp "$DIST: multi-core throughput"
-  $PY python/throughput_probe.py "throughput$SUF.json" >> "$LOG" 2>&1
+  $PY python/throughput_probe.py "results/throughput$SUF.json" >> "$LOG" 2>&1
 
-  if [ -n "${SKIP_VR:-}" ] && [ -f "results_vr_sp100_$DIST.json" ]; then
+  if [ -n "${SKIP_VR:-}" ] && [ -f "results/results_vr_sp100_$DIST.json" ]; then
     stamp "$DIST: variance reduction skipped, reusing results_vr_sp100_$DIST.json"
   else
     stamp "$DIST: variance reduction (curves + timing)"
     MC_PIN_THREADS=1 $PY -W ignore python/mc_variance_reduction.py --workers "$WORKERS" \
-        --out "results_vr_sp100_$DIST.json" >> "$LOG" 2>&1
+        --out "results/results_vr_sp100_$DIST.json" >> "$LOG" 2>&1
     $PY -W ignore python/retime_variance_reduction.py "$WORKERS" 20 \
-        "results_vr_sp100_$DIST.json" >> "$LOG" 2>&1
+        "results/results_vr_sp100_$DIST.json" >> "$LOG" 2>&1
   fi
 done
 
 export MC_DIST=normal
 if command -v julia >/dev/null; then
-  N=$($PY -c "import json;print(json.load(open('results_vr_sp100_normal.json'))['methods']['full']['n_run'])")
+  N=$($PY -c "import json;print(json.load(open('results/results_vr_sp100_normal.json'))['methods']['full']['n_run'])")
   $PY python/export_model.py >> "$LOG" 2>&1
   if [ ! -f jlenv/Manifest.toml ]; then
     stamp "julia: installing AppleAccelerate.jl into ./jlenv (one-off)"
@@ -59,9 +59,9 @@ if command -v julia >/dev/null; then
   fi
   for T in 1 "$WORKERS"; do
     stamp "julia OpenBLAS, $T threads, N=$N"
-    JL_OUT="julia_openblas_$T.json" julia -t "$T" julia/mc_baseline.jl "$N" 20 256 >> "$LOG" 2>&1
+    JL_OUT="results/julia_openblas_$T.json" julia -t "$T" julia/mc_baseline.jl "$N" 20 256 >> "$LOG" 2>&1
     stamp "julia Accelerate, $T threads, N=$N"
-    JL_OUT="julia_accelerate_$T.json" JL_BLAS=accelerate \
+    JL_OUT="results/julia_accelerate_$T.json" JL_BLAS=accelerate \
       julia --project=jlenv -t "$T" julia/mc_baseline.jl "$N" 20 256 >> "$LOG" 2>&1
   done
 else

@@ -93,7 +93,7 @@ if __name__ == "__main__":
               f"{a['p90']:>7.1f}ms {a['max']:>7.1f}ms")
         rows.append({"region": region, "site": site, "device": device,
                      "handshake_ms": h, "api_ms": a})
-    out = sys.argv[1] if len(sys.argv) > 1 else "results_api_latency.json"
+    out = sys.argv[1] if len(sys.argv) > 1 else "results/results_api_latency.json"
     json.dump({"timestamp": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
                "reps": REPS, "rows": rows}, open(out, "w"), indent=2)
     print(f"\nwrote {out}")

@@ -32,8 +32,8 @@ METHODS = ["full", "qmc_chol", "qmc_pca", "is", "is_qmc_pca"]
 # if present, julia_accelerate_1.json from mc_baseline.jl (JL_OUT=...).
 UNIVERSE = os.environ.get("MC_UNIVERSE", "sp100")
 DIST = os.environ.get("MC_DIST", "normal")
-RESULTS = os.environ.get("VR_RESULTS", f"results_vr_{UNIVERSE}_{DIST}.json")
-JULIA = os.environ.get("JL_RESULT", "julia_accelerate_1.json")
+RESULTS = os.environ.get("VR_RESULTS", f"results/results_vr_{UNIVERSE}_{DIST}.json")
+JULIA = os.environ.get("JL_RESULT", "results/julia_accelerate_1.json")
 
 STRINGS = {
     "de": dict(

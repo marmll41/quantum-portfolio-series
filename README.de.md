@@ -107,11 +107,11 @@ Alle Entscheidungen sind im Code kommentiert.
 Gewinne durch Importance Sampling und Quasi-MC weiter. Die Auswahl der heute
 größten Unternehmen ist ein Survivorship-Bias (für einen Rechenzeit-Benchmark
 unerheblich). Eine Maschine, ein Tag; die Last je Schritt steht in
-`benchmark.log`.
+`results/benchmark.log`.
 
 ## Aufbau
 
-Der Code ist nach Sprache gruppiert: `python/` (Modelle, Messungen, Grafiken, Medium-Export), `julia/` (Julia-Portierung der Baseline), `shell/` (die komplette Messkette). Daten und Ergebnisse liegen auf der obersten Ebene und in `data/`. Alle Befehle aus dem Wurzelverzeichnis des Repositorys starten; die Skripte lesen und schreiben ihre Dateien relativ dazu.
+Der Code ist nach Sprache gruppiert: `python/` (Modelle, Messungen, Grafiken, Medium-Export), `julia/` (Julia-Portierung der Baseline), `shell/` (die komplette Messkette). Eingangsdaten liegen in `data/`, Messergebnisse und Protokolle in `results/`. Alle Befehle aus dem Wurzelverzeichnis des Repositorys starten; die Skripte lesen und schreiben ihre Dateien relativ dazu.
 
 ## Nachrechnen
 
@@ -158,12 +158,12 @@ in der Braket-Konsole pro Gerät ein Spending Limit setzen.
 | `julia/mc_baseline.jl`, `python/export_model.py` | Julia-Portierung auf identischem Modell |
 | `shell/run_benchmarks.sh` | Komplette Messkette mit Protokoll |
 | `python/probe_local.py`, `python/probe_api_latency.py` | Artikel 3: lokaler Simulator, Control-Plane-Latenz |
-| `python/loop_core.py`, `python/hybrid_entry.py`, `article4_*.json` | Artikel 4: Latenz-Schleife, Einstieg für den Hybrid Job, Rohdaten |
+| `python/loop_core.py`, `python/hybrid_entry.py`, `results/article4_*.json` | Artikel 4: Latenz-Schleife, Einstieg für den Hybrid Job, Rohdaten |
 | `python/qae_tail.py` | Artikel 5: QAE aus Standard-Gates, Skalierung, Ressourcen, Budget |
-| `python/hw_qae.py`, `hw_tasks.json`, `hw_spend.json` | Artikel 6: Hardware-Läufe, Ergebnisse, Zähler der Spending Limits |
+| `python/hw_qae.py`, `results/hw_tasks.json`, `results/hw_spend.json` | Artikel 6: Hardware-Läufe, Ergebnisse, Zähler der Spending Limits |
 | `python/plot_*.py` | Erzeugen alle Grafiken (DE/EN, hell/dunkel) |
 | `python/medium_export.py` | Macht aus einem Artikel eine Medium-taugliche HTML-Fassung mit Tabellen als Bild |
-| `results_*.json`, `throughput*.json`, `julia_*.json`, `benchmark.log` | Rohergebnisse |
+| `results/` | Alle Messergebnisse (`results_*.json`, `throughput*.json`, `julia_*.json`, `article4_*.json`, `hw_*.json`) und `benchmark.log` |
 | `archiv/` | Erste Version (synthetisches Modell) und verworfene Läufe, mit Vermerken |
 | `quellen-dossier.md`, `ergebnisse-speedup.md` | Quellen-Dossier und Ergebnisnotizen |
 

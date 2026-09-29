@@ -104,11 +104,11 @@ All decisions are commented in the code.
 **Limits.** The portfolio is linear; for a book with options the gains from
 importance sampling and quasi-MC shrink further. Selecting today's largest
 companies is a survivorship bias (harmless for a compute-time benchmark).
-One machine, one day; the load average per step is in `benchmark.log`.
+One machine, one day; the load average per step is in `results/benchmark.log`.
 
 ## Layout
 
-Code is grouped by language: `python/` (models, measurements, plots, Medium export), `julia/` (Julia port of the baseline), `shell/` (the complete measurement chain). Data and results stay at the top level and in `data/`. Run every command from the repository root; the scripts read and write their files relative to it.
+Code is grouped by language: `python/` (models, measurements, plots, Medium export), `julia/` (Julia port of the baseline), `shell/` (the complete measurement chain). Input data is in `data/`, measured results and logs in `results/`. Run every command from the repository root; the scripts read and write their files relative to it.
 
 ## Reproduce
 
@@ -155,12 +155,12 @@ limit per device in the Braket console first.
 | `julia/mc_baseline.jl`, `python/export_model.py` | Julia port on the identical model |
 | `shell/run_benchmarks.sh` | Complete measurement chain with log |
 | `python/probe_local.py`, `python/probe_api_latency.py` | Article 3: local simulator, control-plane latency |
-| `python/loop_core.py`, `python/hybrid_entry.py`, `article4_*.json` | Article 4: latency loop, Hybrid Job entry point, raw data |
+| `python/loop_core.py`, `python/hybrid_entry.py`, `results/article4_*.json` | Article 4: latency loop, Hybrid Job entry point, raw data |
 | `python/qae_tail.py` | Article 5: QAE from standard gates, scaling, resources, budget |
-| `python/hw_qae.py`, `hw_tasks.json`, `hw_spend.json` | Article 6: hardware runs, results, spending-limit counters |
+| `python/hw_qae.py`, `results/hw_tasks.json`, `results/hw_spend.json` | Article 6: hardware runs, results, spending-limit counters |
 | `python/plot_*.py` | Regenerate all figures (DE/EN, light/dark) |
 | `python/medium_export.py` | Turns an article into Medium-ready HTML with tables as images |
-| `results_*.json`, `throughput*.json`, `julia_*.json`, `benchmark.log` | Raw results |
+| `results/` | All measured results (`results_*.json`, `throughput*.json`, `julia_*.json`, `article4_*.json`, `hw_*.json`) and `benchmark.log` |
 | `archiv/` | First version (synthetic model) and discarded runs, with notes |
 | `quellen-dossier.md`, `ergebnisse-speedup.md` | Source dossier and result notes (German) |
 

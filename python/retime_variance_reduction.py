@@ -26,7 +26,7 @@ def retime_curves(rounds: int = 7):
     """Re-time every grid point of every error curve on one core, rounds
     interleaved across methods and N. Errors are kept: they depend on the
     seeds, not on machine load."""
-    path = sys.argv[3] if len(sys.argv) > 3 else "results_variance_reduction.json"
+    path = sys.argv[3] if len(sys.argv) > 3 else "results/results_variance_reduction.json"
     res = json.load(open(path))
     m = build_model()
     f = v.make_factors(m)
@@ -54,7 +54,7 @@ def main():
         return retime_curves(int(sys.argv[2]) if len(sys.argv) > 2 else 7)
     workers = int(sys.argv[1]) if len(sys.argv) > 1 else 14
     rounds = int(sys.argv[2]) if len(sys.argv) > 2 else 15
-    path = sys.argv[3] if len(sys.argv) > 3 else "results_variance_reduction.json"
+    path = sys.argv[3] if len(sys.argv) > 3 else "results/results_variance_reduction.json"
     res = json.load(open(path))
     m = build_model()
     truth = exact_reference(m)["cvar"]

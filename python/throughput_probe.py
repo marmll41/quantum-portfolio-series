@@ -43,7 +43,7 @@ def cpu_brand():
 if __name__ == "__main__":
     import json, sys
     from mc_baseline import UNIVERSE, DIST
-    out = sys.argv[1] if len(sys.argv) > 1 else "throughput.json"
+    out = sys.argv[1] if len(sys.argv) > 1 else "results/throughput.json"
     N = 20_000_000
     ncpu = os.cpu_count()
     grid = sorted({w for w in (1, 2, 4, 8, 14, 20, 28) if w <= ncpu} | {ncpu})

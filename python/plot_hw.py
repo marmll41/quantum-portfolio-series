@@ -34,9 +34,9 @@ S = {
 
 def render(lang, P, out):
     L = S[lang]
-    tasks = json.load(open("hw_tasks.json"))
-    prev = json.load(open("results_hw_preview.json"))
-    a = json.load(open("results_hw_check.json"))["a"]
+    tasks = json.load(open("results/hw_tasks.json"))
+    prev = json.load(open("results/results_hw_preview.json"))
+    a = json.load(open("results/results_hw_check.json"))["a"]
     th = math.asin(math.sqrt(a))
     fig, ax = plt.subplots(figsize=(10, 6.2), dpi=200)
     fig.patch.set_facecolor(P["surface"]); ax.set_facecolor(P["surface"])

@@ -43,8 +43,8 @@ S = {
 
 def render(lang, P, out):
     L = S[lang]
-    s400 = json.load(open("results_qae_scaling_s400.json"))
-    s100 = json.load(open("results_qae_scaling_s100.json"))
+    s400 = json.load(open("results/results_qae_scaling_s400.json"))
+    s100 = json.load(open("results/results_qae_scaling_s100.json"))
     fig, ax = plt.subplots(figsize=(10, 6.2), dpi=200)
     fig.patch.set_facecolor(P["surface"]); ax.set_facecolor(P["surface"])
 

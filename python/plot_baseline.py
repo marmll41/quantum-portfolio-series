@@ -58,13 +58,13 @@ SUFFIX = "" if SUFFIX == "normal" else f"_{SUFFIX}"
 
 
 def load():
-    d = json.load(open(f"results_1core{SUFFIX}.json"))
+    d = json.load(open(f"results/results_1core{SUFFIX}.json"))
     return d["results"]["full"], d["results"]["reduced"]
 
 
 def load_throughput():
     """Multi-core throughput at the largest worker count, persistent pool."""
-    tp = json.load(open(f"throughput{SUFFIX}.json"))
+    tp = json.load(open(f"results/throughput{SUFFIX}.json"))
     best = max(tp["rows"], key=lambda r: r["workers"])
     return best["paths_per_s"], best["workers"], tp
 
@@ -75,7 +75,7 @@ THROUGHPUT_MC, CORES, _TP = load_throughput()
 def direct_times():
     """Direct wall-clock of plain MC at N(eps): (1 core, all workers)."""
     dist = os.environ.get("MC_DIST", "normal")
-    path = f"results_vr_sp100_{dist}.json"
+    path = f"results/results_vr_sp100_{dist}.json"
     if not os.path.exists(path):
         return None
     t = json.load(open(path))["methods"]["full"]["timing"]
@@ -86,7 +86,7 @@ def law_constant(cells):
     """C in err = C / sqrt(N): the exact asymptotic constant from
     mc_baseline.cvar_error_constant. Both samplers draw the same loss
     distribution, so they share it; the markers show the measurement."""
-    return json.load(open(f"results_1core{SUFFIX}.json"))[
+    return json.load(open(f"results/results_1core{SUFFIX}.json"))[
         "cvar_error_constant_exact"]
 
 
@@ -96,7 +96,7 @@ def asymptotic_throughput(cells):
 
 
 def render(lang: str, P: dict, out: str):
-    env = json.load(open(f"results_1core{SUFFIX}.json"))["env"]
+    env = json.load(open(f"results/results_1core{SUFFIX}.json"))["env"]
     fill = dict(cpu=_TP["cpu"], cores=CORES,
                 numpy=env["numpy"],
                 universe=UNIVERSE_LABEL[lang].get(env.get("universe"),

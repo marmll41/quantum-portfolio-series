@@ -410,7 +410,7 @@ def main() -> None:
     p.add_argument("--workers", type=int, default=1)
     p.add_argument("--sampler", choices=["full", "reduced", "both"],
                    default="both")
-    p.add_argument("--out", default="results.json")
+    p.add_argument("--out", default="results/results.json")
     args = p.parse_args()
 
     grid = [10**3, 10**4, 10**5, 10**6]

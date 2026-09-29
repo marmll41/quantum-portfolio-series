@@ -326,7 +326,7 @@ def cmd_validate():
               f"{sp[str(n)]['max_abs_diff']:.1e}, CNOTs {sp[str(n)]['cnots']}")
     json.dump({"validate": rows, "carry_clean_p0": float(pc[0]),
                "state_preparation": sp},
-              open("results_qae_validate.json", "w"), indent=2)
+              open("results/results_qae_validate.json", "w"), indent=2)
 
 
 def cmd_scaling(shots=100, n=10, reps=400, max_m=12, seed=2026):
@@ -370,7 +370,7 @@ def cmd_scaling(shots=100, n=10, reps=400, max_m=12, seed=2026):
     out["slope_mc"] = fit("mc", "relerr")
     print(f"slopes: MLAE rmse {out['slope_mlae_rmse']:+.3f}  median "
           f"{out['slope_mlae_median']:+.3f}   sampling {out['slope_mc']:+.3f}")
-    json.dump(out, open(f"results_qae_scaling_s{shots}.json", "w"), indent=2)
+    json.dump(out, open(f"results/results_qae_scaling_s{shots}.json", "w"), indent=2)
 
 
 def cmd_resources():
@@ -388,7 +388,7 @@ def cmd_resources():
         print(f"n={n:2d} qubits={r['qubits']:2d}  VaR grid {r['bin_width_rel_var']:.1%}"
               f"  A: {r['A_two_qubit']:>6,} 2q, depth {r['A_depth']:>6,}   "
               f"Q: {r['Q_two_qubit']:>6,} 2q, depth {r['Q_depth']:>6,}")
-    json.dump(rows, open("results_qae_resources.json", "w"), indent=2)
+    json.dump(rows, open("results/results_qae_resources.json", "w"), indent=2)
 
 
 def cmd_budget(n=10, shots=400, eps=1e-3):
@@ -399,10 +399,10 @@ def cmd_budget(n=10, shots=400, eps=1e-3):
     circuits of n qubits. Times are gates only and serial in depth -- no
     readout, no reset, no cloud: the most favourable reading.
     """
-    sc = json.load(open(f"results_qae_scaling_s{shots}.json"))
+    sc = json.load(open(f"results/results_qae_scaling_s{shots}.json"))
     row = next(r for r in sc["mlae"] if r["relerr"] <= eps)
     ks = mlae_schedule(row["m"])
-    res = {r["n"]: r for r in json.load(open("results_qae_resources.json"))}[n]
+    res = {r["n"]: r for r in json.load(open("results/results_qae_resources.json"))}[n]
     A2, Q2, Ad, Qd = (res["A_two_qubit"], res["Q_two_qubit"],
                       res["A_depth"], res["Q_depth"])
     kmax = max(ks)
@@ -432,7 +432,7 @@ def cmd_budget(n=10, shots=400, eps=1e-3):
     for p_err in (1e-3, 5e-3, 1e-2):
         out["survival_deepest"][str(p_err)] = math.exp(deep_2q * math.log1p(-p_err))
         out["max_gates_for_half"][str(p_err)] = math.log(2) / -math.log1p(-p_err)
-    r3 = {r["n"]: r for r in json.load(open("results_qae_resources.json"))}[3]
+    r3 = {r["n"]: r for r in json.load(open("results/results_qae_resources.json"))}[3]
     errors = {name: 1 - d["fidelity_median"] for name, d in devs.items()
               if "fidelity_median" in d}
     errors["IonQ Forte"] = 1 - devs["IonQ Forte"]["fidelity_mean_2q"]
@@ -449,17 +449,17 @@ def cmd_budget(n=10, shots=400, eps=1e-3):
             "survival_state_prep_n3": (1 - pe) ** (2 ** 3 - 2),
             "survival_A_n3": (1 - pe) ** r3["A_two_qubit"]}
     # Classical side of the same estimate: n_mc samples at measured rates.
-    b1 = json.load(open("results_1core.json"))
+    b1 = json.load(open("results/results_1core.json"))
     red = max(b1["results"]["reduced"], key=lambda c: c["n"])["paths_per_s"]
-    tp = json.load(open("throughput.json"))
+    tp = json.load(open("results/throughput.json"))
     full14 = max(tp["rows"], key=lambda r: r["workers"])
-    vr = json.load(open("results_vr_sp100_normal.json"))["methods"]["full"]
+    vr = json.load(open("results/results_vr_sp100_normal.json"))["methods"]["full"]
     per_path_direct = vr["timing"]["14"]["time_median_s"] / vr["n_run"]
     out["classical"] = {
         "one_dim_1core_s": n_mc / red,
         "full_14core_throughput_s": n_mc / full14["paths_per_s"],
         "full_14core_end_to_end_rate_s": n_mc * per_path_direct}
-    json.dump(out, open("results_qae_budget.json", "w"), indent=2)
+    json.dump(out, open("results/results_qae_budget.json", "w"), indent=2)
     print(json.dumps(out, indent=2))
 
 
