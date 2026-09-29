@@ -21,6 +21,6 @@ article-*.md
 artikel-*.md
 medium/
 
-# figures belong to the articles on Medium; plot_*.py regenerate them
-fig_*.png
+# figures belong to the articles on Medium; python/plot_*.py regenerate them
+figures/
 archiv/

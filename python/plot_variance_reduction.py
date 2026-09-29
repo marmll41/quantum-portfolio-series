@@ -160,6 +160,7 @@ def render(lang, P, res, out, julia, cpu):
         t.set_color(P["ink"])
 
     fig.tight_layout()
+    os.makedirs("figures", exist_ok=True)
     fig.savefig(out, facecolor=P["surface"])
     print(f"wrote {out}")
 
@@ -173,5 +174,5 @@ if __name__ == "__main__":
     tag = f"{UNIVERSE}_{DIST}"
     for lang in ("de", "en"):
         for mode, P in (("light", LIGHT), ("dark", DARK)):
-            render(lang, P, res, f"fig_methods_{tag}_{lang}_{mode}.png",
+            render(lang, P, res, f"figures/fig_methods_{tag}_{lang}_{mode}.png",
                    julia, cpu)

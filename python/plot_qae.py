@@ -6,6 +6,7 @@ says so.
 Renders 4 files: {de,en} x {light,dark}.
 """
 import json
+import os
 
 import matplotlib
 matplotlib.use("Agg")
@@ -87,6 +88,7 @@ def render(lang, P, out):
     for t in leg.get_texts():
         t.set_color(P["ink"])
     fig.tight_layout()
+    os.makedirs("figures", exist_ok=True)
     fig.savefig(out, facecolor=P["surface"])
     print(f"wrote {out}")
 
@@ -94,4 +96,4 @@ def render(lang, P, out):
 if __name__ == "__main__":
     for lang in ("de", "en"):
         for mode, P in (("light", LIGHT), ("dark", DARK)):
-            render(lang, P, f"fig_qae_scaling_{lang}_{mode}.png")
+            render(lang, P, f"figures/fig_qae_scaling_{lang}_{mode}.png")

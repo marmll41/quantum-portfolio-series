@@ -14,6 +14,7 @@ Bottom      the Garnet iteration broken into its layers. The layers are
 Renders {de,en} x {light,dark}.
 """
 import json
+import os
 import statistics as st
 
 import matplotlib
@@ -143,6 +144,7 @@ def render(lang, P, out):
         lbl.set_color(P["ink"])
 
     fig.subplots_adjust(left=.20, right=.97, top=.86, bottom=.09)
+    os.makedirs("figures", exist_ok=True)
     fig.savefig(out, facecolor=P["surface"])
     print(f"wrote {out}")
 
@@ -150,7 +152,7 @@ def render(lang, P, out):
 if __name__ == "__main__":
     for lang in ("de", "en"):
         for mode, P in (("light", LIGHT), ("dark", DARK)):
-            render(lang, P, f"fig_latency_{lang}_{mode}.png")
+            render(lang, P, f"figures/fig_latency_{lang}_{mode}.png")
     vals, local, layers, total = load()
     print(f"\nSchichten: {[round(x) for x in layers]}  Summe {sum(layers):.0f} ms "
           f"(gemessener Default-Median {total:.0f} ms)")

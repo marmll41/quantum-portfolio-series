@@ -183,6 +183,7 @@ def render(lang: str, P: dict, out: str):
         t.set_color(P["ink"])
 
     fig.tight_layout()
+    os.makedirs("figures", exist_ok=True)
     fig.savefig(out, facecolor=P["surface"])
     print(f"wrote {out}")
 
@@ -190,7 +191,7 @@ def render(lang: str, P: dict, out: str):
 if __name__ == "__main__":
     for lang in ("de", "en"):
         for mode, P in (("light", LIGHT), ("dark", DARK)):
-            render(lang, P, f"fig_baseline{SUFFIX}_{lang}_{mode}.png")
+            render(lang, P, f"figures/fig_baseline{SUFFIX}_{lang}_{mode}.png")
 
     full, reduced = load()
     C_full, C_red = law_constant(full), law_constant(reduced)
