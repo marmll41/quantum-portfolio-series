@@ -333,8 +333,9 @@ def cvar_error_constant(m: Model, q: float = CONFIDENCE) -> float:
 
     The empirical CVaR estimator is asymptotically normal with
         N * Var -> Var[(L - VaR_q)^+] / (1 - q)^2
-    (Rockafellar-Uryasev form; Hong & Liu, Management Science 55(2), 2009;
-    review: Hong, Hu & Liu, ACM TOMACS 24(4), 2014).
+    (Rockafellar-Uryasev form; Hong & Liu, Proc. Winter Simulation
+    Conference 2011, Theorem 1, after Trindade et al., J. Banking & Finance
+    31(11), 2007; review: Hong, Hu & Liu, ACM TOMACS 24(4), 2014).
     L is univariate normal or t here, so the tail moments are one-dimensional
     integrals. This replaces calibrating C at one measured point: with 20
     replications a measured RMSE carries ~16% noise, which enters N squared.
