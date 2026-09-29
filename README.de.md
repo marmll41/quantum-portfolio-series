@@ -164,7 +164,6 @@ in der Braket-Konsole pro Gerät ein Spending Limit setzen.
 | `python/plot_*.py` | Erzeugen alle Grafiken (DE/EN, hell/dunkel) |
 | `python/medium_export.py` | Macht aus einem Artikel eine Medium-taugliche HTML-Fassung mit Tabellen als Bild |
 | `results/` | Alle Messergebnisse (`results_*.json`, `throughput*.json`, `julia_*.json`, `article4_*.json`, `hw_*.json`) und `benchmark.log` |
-| `archiv/` | Erste Version (synthetisches Modell) und verworfene Läufe, mit Vermerken |
 | `source-dossier.md`, `source-dossier.de.md` | Quellen-Dossier (Englisch, Deutsch) |
 | `speedup-results.md`, `speedup-results.de.md` | Ergebnisnotizen zur Speedup-Messung (Englisch, Deutsch) |
 

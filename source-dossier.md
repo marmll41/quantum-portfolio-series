@@ -490,8 +490,9 @@ per run:
 - Extrapolation 200 iterations × 3 round trips in us-west-1: 395 s instead of
   552 s.
 - Worked into article 3 (DE/EN) as a paragraph on stability; the table of
-  23 Sep remains the main measurement. For the discarded runs of 25 Sep see
-  `archiv/README.md`.
+  23 Sep remains the main measurement. Two earlier repeats on 25 Sep were
+  discarded because the local network was unstable (handshake to us-west-1
+  5,175 and 463 ms); they measured the local network, not Braket.
 
 **Consequence:** Braket Hybrid Jobs run the classical loop inside AWS, next to
 the device. That is exactly what they exist for. The comparison "loop from the

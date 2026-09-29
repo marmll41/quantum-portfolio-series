@@ -23,4 +23,4 @@ medium/
 
 # figures belong to the articles on Medium; plot_*.py regenerate them
 fig_*.png
-archiv/fig_*.png
+archiv/

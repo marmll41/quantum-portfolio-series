@@ -486,8 +486,9 @@ nicht belegt.
 - Über Tage schwanken die Absolutwerte um rund ein Drittel (us-west-1 920 → 658 ms).
 - Hochrechnung 200 Iterationen × 3 Round-Trips in us-west-1: 395 s statt 552 s.
 - In Artikel 3 (DE/EN) als Stabilitätsabsatz eingearbeitet; die Tabelle vom
-  23.09. bleibt die Hauptmessung. Die verworfenen Läufe vom 25.09. siehe
-  `archiv/README.md`.
+  23.09. bleibt die Hauptmessung. Zwei frühere Wiederholungen am 25.09. wurden
+  verworfen, weil das lokale Netz instabil war (Handshake nach us-west-1
+  5.175 bzw. 463 ms); sie maßen das lokale Netz, nicht Braket.
 
 **Konsequenz:** Braket Hybrid Jobs führen die klassische Schleife innerhalb
 von AWS neben dem Gerät aus. Genau dafür existieren sie. Der Vergleich

@@ -42,7 +42,7 @@ Methode? Und was davon übersteht echte Daten und dicke Enden?
 4. **Quasi-MC ist robust:** 9× und 16–17× in beiden Verteilungen. Lokale
    Steigungen −0,54 bis −0,83 — teilweise klassisch „quadratisch".
 
-## Vergleich mit dem synthetischen Ein-Faktor-Modell (archiv/)
+## Vergleich mit dem synthetischen Ein-Faktor-Modell (erste Version)
 
 Das synthetische Modell war der günstigste Fall: IS + Quasi-MC erreichte dort
 Faktor 63, Quasi-MC mit PCA 18×, mit Cholesky nur 3,3×. Mit echten Daten

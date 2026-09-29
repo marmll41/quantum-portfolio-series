@@ -42,7 +42,7 @@ which of it survives real data and fat tails?
 4. **Quasi-MC is robust:** 9× and 16–17× under both distributions. Local
    slopes −0.54 to −0.83 — in part classically "quadratic".
 
-## Comparison with the synthetic one-factor model (archiv/)
+## Comparison with the synthetic one-factor model (first version)
 
 The synthetic model was the most favourable case: there IS + quasi-MC
 reached a factor of 63, quasi-MC with PCA 18×, with Cholesky only 3.3×. With
