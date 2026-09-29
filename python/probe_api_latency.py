@@ -13,6 +13,12 @@ The probe separates two things that a naive timing conflates:
 
 Reporting only the second would hide where the time goes; reporting only the
 first would understate it.
+
+Caveat, found later: TARGETS query a different device in each region, and
+GetDevice returns the device's calibration data -- 482 KB for Rigetti Cepheus,
+5 KB for SV1. The regional comparison therefore mixes region and payload.
+probe_api_crosscheck.py separates the two; this script is kept because the
+article's first measurement came from it.
 """
 import os
 import socket

@@ -431,6 +431,12 @@ against it.
 
 ### Own measurement: Braket control-plane latency (2026-09-23)
 
+> **Correction 29 Sep 2026:** The "central finding" below is **refuted**. The
+> measurement queried a different device in each region (us-west-1: Rigetti
+> Cepheus, us-west-2: SV1). Cepheus's `GetDevice` response is 482 KB, SV1's
+> 5 KB. With the same device (SV1), us-west-1 is not slower than us-west-2. See
+> "Cross-check 2026-09-29" below. Article 3 has been rewritten accordingly.
+
 From a machine in Germany, `GetDevice` (free API call, no task submitted).
 Handshake = fresh DNS + TCP + TLS, i.e. the physical floor. API = warm call on
 an established connection.
@@ -483,16 +489,55 @@ per run:
 - Across the three runs the medians vary by at most 11% (Stockholm), in
   us-west-1 by 1%. Maximum us-west-1: 915 / 974 / 1,003 ms (23 Sep: 4,217 ms).
 - Ratio us-west-1 / us-west-2: 2.79 / 2.79 / 2.67 (23 Sep: 3.4). The handshake
-  to us-west-1 is even shorter here than to us-west-2 — which sharpens the
-  finding "region, not distance".
+  to us-west-1 is even shorter here than to us-west-2. (The reading "region,
+  not distance" was wrong, see the cross-check.)
 - Across days the absolute values vary by about a third (us-west-1
   920 → 658 ms).
 - Extrapolation 200 iterations × 3 round trips in us-west-1: 395 s instead of
   552 s.
-- Worked into article 3 (DE/EN) as a paragraph on stability; the table of
-  23 Sep remains the main measurement. Two earlier repeats on 25 Sep were
+- First worked into article 3 as a paragraph on stability; replaced by the
+  cross-check below. Two earlier repeats on 25 Sep were
   discarded because the local network was unstable (handshake to us-west-1
   5,175 and 463 ms); they measured the local network, not Braket.
+
+### Cross-check 2026-09-29 — payload size, not region
+
+`python/probe_api_crosscheck.py`, three runs,
+`results/results_api_crosscheck_2026-09-29_run{1,2,3}.json`. Prompted by the
+literature review, which pointed out that the measurement queries different
+devices per region. Median of the three runs:
+
+| Call | Region | Device | Response | Median |
+|---|---|---|---:|---:|
+| GetDevice | eu-west-2 | SV1 | 5 KB | 95 ms |
+| GetDevice | us-east-1 | SV1 | 5 KB | 181 ms |
+| GetDevice | us-west-1 | SV1 | 5 KB | **222 ms** |
+| GetDevice | us-west-2 | SV1 | 5 KB | **241 ms** |
+| GetDevice | eu-north-1 | IQM Garnet | 43 KB | 149 ms |
+| GetDevice | eu-north-1 | IQM Emerald | 110 KB | 204 ms |
+| GetDevice | us-east-1 | IonQ Forte Enterprise 1 | 14 KB | 224 ms |
+| GetDevice | us-west-1 | Rigetti Cepheus-1-108Q | **482 KB** | **633 ms** |
+| GetQuantumTask | eu-north-1 | IQM Garnet | 2 KB | 106 ms |
+| GetQuantumTask | us-east-1 | IonQ Forte Enterprise 1 | 2 KB | 204 ms |
+| GetQuantumTask | us-west-1 | Rigetti Cepheus-1 | 2 KB | 244 ms |
+
+Handshake the same day: London 65, Stockholm 93, Virginia 229,
+N. California 345, Oregon 365 ms.
+
+- Latency follows distance. With the same device, us-west-1 is slightly faster
+  than us-west-2.
+- The 920 and 658 ms for us-west-1 were the transfer of Cepheus's 482 KB of
+  calibration data. Inside Stockholm too: Garnet 149 ms, Emerald 204 ms.
+- `AwsDevice(arn)` calls `GetDevice` on construction (SDK source,
+  `_populate_properties`) — about 0.6 s per construction for Cepheus.
+- Cepheus reports `getTaskPollIntervalMillis = 200`, so the SDK polls every
+  0.2 s there instead of 1 s. Garnet, Emerald, Forte Enterprise 1 and SV1
+  report no value (default 1 s).
+- Extrapolation for 200 iterations with `GetQuantumTask`: Stockholm 21 s,
+  Virginia 41 s, N. California 49 s; times three 64 / 122 / 146 s (instead of
+  552 s).
+- "Factor of 188": already published by quantumcomputingcost.com (Oliver
+  Wakefield-Smith, 3 Jun 2026) as "more than 180x"; cited in article 3.
 
 **Consequence:** Braket Hybrid Jobs run the classical loop inside AWS, next to
 the device. That is exactly what they exist for. The comparison "loop from the

@@ -124,7 +124,7 @@ python3 -m venv .venv && ./.venv/bin/pip install numpy scipy matplotlib amazon-b
 
 # article 3: local simulator and control-plane latency (free, read-only calls)
 ./.venv/bin/python python/probe_local.py
-AWS_PROFILE=<your-profile> ./.venv/bin/python python/probe_api_latency.py
+AWS_PROFILE=<your-profile> ./.venv/bin/python python/probe_api_crosscheck.py
 
 # article 5: QAE on the local simulator (free)
 ./.venv/bin/python python/qae_tail.py validate
@@ -154,7 +154,8 @@ limit per device in the Braket console first.
 | `python/throughput_probe.py` | Multi-core scaling with a persistent pool |
 | `julia/mc_baseline.jl`, `python/export_model.py` | Julia port on the identical model |
 | `shell/run_benchmarks.sh` | Complete measurement chain with log |
-| `python/probe_local.py`, `python/probe_api_latency.py` | Article 3: local simulator, control-plane latency |
+| `python/probe_local.py`, `python/probe_api_crosscheck.py` | Article 3: local simulator, control-plane latency (same device per region, response sizes, poll call) |
+| `python/probe_api_latency.py` | First latency probe; queries a different device per region and is kept for the record (see the dossier) |
 | `python/loop_core.py`, `python/hybrid_entry.py`, `results/article4_*.json` | Article 4: latency loop, Hybrid Job entry point, raw data |
 | `python/qae_tail.py` | Article 5: QAE from standard gates, scaling, resources, budget |
 | `python/hw_qae.py`, `results/hw_tasks.json`, `results/hw_spend.json` | Article 6: hardware runs, results, spending-limit counters |

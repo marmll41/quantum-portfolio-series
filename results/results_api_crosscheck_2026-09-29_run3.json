@@ -1,0 +1,135 @@
+{
+  "timestamp": "2026-09-29T14:20:45+0200",
+  "reps": 15,
+  "rows": [
+    {
+      "region": "us-east-1",
+      "device": "quantum-simulator/amazon/sv1",
+      "call": "GetDevice",
+      "bytes": 4973,
+      "poll_interval_ms": null,
+      "ms": {
+        "median": 180.97337501239963,
+        "min": 163.09312501107343,
+        "max": 274.08674999605864
+      }
+    },
+    {
+      "region": "us-west-1",
+      "device": "quantum-simulator/amazon/sv1",
+      "call": "GetDevice",
+      "bytes": 4973,
+      "poll_interval_ms": null,
+      "ms": {
+        "median": 222.2874999861233,
+        "min": 211.1658340145368,
+        "max": 312.28670800919645
+      }
+    },
+    {
+      "region": "us-west-2",
+      "device": "quantum-simulator/amazon/sv1",
+      "call": "GetDevice",
+      "bytes": 4973,
+      "poll_interval_ms": null,
+      "ms": {
+        "median": 240.91829202370718,
+        "min": 228.6007910151966,
+        "max": 449.49787500081584
+      }
+    },
+    {
+      "region": "eu-west-2",
+      "device": "quantum-simulator/amazon/sv1",
+      "call": "GetDevice",
+      "bytes": 4973,
+      "poll_interval_ms": null,
+      "ms": {
+        "median": 89.2278749961406,
+        "min": 70.40466601029038,
+        "max": 139.17249999940395
+      }
+    },
+    {
+      "region": "eu-north-1",
+      "device": "qpu/iqm/Garnet",
+      "call": "GetDevice",
+      "bytes": 42851,
+      "poll_interval_ms": null,
+      "ms": {
+        "median": 149.30758299306035,
+        "min": 133.6802909791004,
+        "max": 288.8424999837298
+      }
+    },
+    {
+      "region": "eu-north-1",
+      "device": "qpu/iqm/Emerald",
+      "call": "GetDevice",
+      "bytes": 109656,
+      "poll_interval_ms": null,
+      "ms": {
+        "median": 204.49970799381845,
+        "min": 188.69904201710597,
+        "max": 307.06554200151004
+      }
+    },
+    {
+      "region": "us-east-1",
+      "device": "qpu/ionq/Forte-Enterprise-1",
+      "call": "GetDevice",
+      "bytes": 13857,
+      "poll_interval_ms": null,
+      "ms": {
+        "median": 227.85383299924433,
+        "min": 209.6307500032708,
+        "max": 320.03795899800025
+      }
+    },
+    {
+      "region": "us-west-1",
+      "device": "qpu/rigetti/Cepheus-1-108Q",
+      "call": "GetDevice",
+      "bytes": 482207,
+      "poll_interval_ms": 200,
+      "ms": {
+        "median": 654.5078330091201,
+        "min": 581.6266660112888,
+        "max": 907.7312500157859
+      }
+    },
+    {
+      "region": "eu-north-1",
+      "device": "IQM Garnet",
+      "call": "GetQuantumTask",
+      "bytes": 2085,
+      "ms": {
+        "median": 109.72662499989383,
+        "min": 96.80433297762647,
+        "max": 176.8050829996355
+      }
+    },
+    {
+      "region": "us-east-1",
+      "device": "IonQ Forte Enterprise 1",
+      "call": "GetQuantumTask",
+      "bytes": 2041,
+      "ms": {
+        "median": 203.75683301244862,
+        "min": 173.33954200148582,
+        "max": 255.7307499810122
+      }
+    },
+    {
+      "region": "us-west-1",
+      "device": "Rigetti Cepheus-1",
+      "call": "GetQuantumTask",
+      "bytes": 2047,
+      "ms": {
+        "median": 244.48516700067557,
+        "min": 227.60545799974352,
+        "max": 259.6219170081895
+      }
+    }
+  ]
+}
