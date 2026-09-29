@@ -442,7 +442,7 @@ Boden. API = warmer Aufruf auf bestehender Verbindung.
 **Der zentrale Befund:** us-west-1 und us-west-2 haben praktisch identischen
 Handshake (419 vs. 422 ms) — gleiche Entfernung. Aber die API-Antwort
 unterscheidet sich um **Faktor 3,4**. Das ist keine Distanz, das ist die
-Region selbst. us-west-1 ist AWS' älteste und kleinste Westküsten-Region.
+Region selbst. us-west-1 ist AWS' älteste Westküsten-Region (2009).
 
 Und genau dort steht Cepheus-1-108Q — das Gerät mit 108 Qubits und dem
 günstigsten Shot-Preis. **Man zahlt in Latenz, was man an Shots spart.**
@@ -459,9 +459,33 @@ nur Round-Trip, ohne Queue und ohne Gate-Zeit:
 Eine echte Schleife braucht pro Iteration mehrere Aufrufe (submit, poll,
 retrieve), der Faktor ist also noch höher.
 
-**Einschränkung:** Eine Messreihe, ein Standort, ein Zeitpunkt. us-west-1
-wurde dreimal gemessen (Median 785 / 1.001 / 920 ms) — der Befund ist stabil,
-die Verallgemeinerung auf andere Standorte nicht belegt.
+**Einschränkung:** Ein Standort. us-west-1 wurde am 23.09. dreimal gemessen
+(Median 785 / 1.001 / 920 ms) — die Verallgemeinerung auf andere Standorte ist
+nicht belegt.
+
+### Wiederholung 2026-09-29 (drei Läufe direkt hintereinander, stabiles Netz)
+
+`results_api_latency_2026-09-29_run{1,2,3}.json`, gleiches Skript
+(`probe_api_latency.py`, 15 Aufrufe je Gerät), 10:23–10:27 Uhr. API-Median je Lauf:
+
+| Region / Gerät | Lauf 1 | Lauf 2 | Lauf 3 | Handshake | 23.09. |
+|---|---:|---:|---:|---:|---:|
+| eu-north-1 IQM Garnet | 142 ms | 145 ms | 131 ms | 91–93 ms | 140 ms |
+| eu-north-1 AQT Ibex-Q1 | 109 ms | 111 ms | 108 ms | 91–93 ms | – |
+| us-east-1 IonQ Forte Enterprise 1 | 209 ms | 207 ms | 204 ms | 227–235 ms | 271 ms |
+| us-west-1 Rigetti Cepheus-1 | **654 ms** | **659 ms** | **660 ms** | 341–348 ms | 920 ms |
+| us-west-2 SV1 | 234 ms | 236 ms | 248 ms | 367–379 ms | 269 ms |
+
+- Zwischen den drei Läufen schwanken die Mediane um höchstens 11 % (Stockholm),
+  in us-west-1 um 1 %. Maximum us-west-1: 915 / 974 / 1.003 ms (23.09.: 4.217 ms).
+- Verhältnis us-west-1 / us-west-2: 2,79 / 2,79 / 2,67 (23.09.: 3,4). Der
+  Handshake nach us-west-1 ist hier sogar kürzer als nach us-west-2 — der
+  Befund „Region, nicht Entfernung" wird dadurch schärfer.
+- Über Tage schwanken die Absolutwerte um rund ein Drittel (us-west-1 920 → 658 ms).
+- Hochrechnung 200 Iterationen × 3 Round-Trips in us-west-1: 395 s statt 552 s.
+- In Artikel 3 (DE/EN) als Stabilitätsabsatz eingearbeitet; die Tabelle vom
+  23.09. bleibt die Hauptmessung. Die verworfenen Läufe vom 25.09. siehe
+  `archiv/README.md`.
 
 **Konsequenz:** Braket Hybrid Jobs führen die klassische Schleife innerhalb
 von AWS neben dem Gerät aus. Genau dafür existieren sie. Der Vergleich

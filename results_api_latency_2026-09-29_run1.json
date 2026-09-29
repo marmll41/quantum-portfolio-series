@@ -1,0 +1,81 @@
+{
+  "timestamp": "2026-09-29T10:24:53+0200",
+  "reps": 15,
+  "rows": [
+    {
+      "region": "eu-north-1",
+      "site": "Stockholm",
+      "device": "iqm/Garnet",
+      "handshake_ms": {
+        "median": 90.61183300218545,
+        "min": 89.0943749982398
+      },
+      "api_ms": {
+        "median": 141.87804202083498,
+        "min": 117.82149999635294,
+        "p90": 150.23604201269336,
+        "max": 417.64833402703516
+      }
+    },
+    {
+      "region": "eu-north-1",
+      "site": "Stockholm",
+      "device": "aqt/Ibex-Q1",
+      "handshake_ms": {
+        "median": 90.61183300218545,
+        "min": 89.0943749982398
+      },
+      "api_ms": {
+        "median": 108.96475001936778,
+        "min": 85.55616700323299,
+        "p90": 123.18279198370874,
+        "max": 167.8032079944387
+      }
+    },
+    {
+      "region": "us-east-1",
+      "site": "N. Virginia",
+      "device": "ionq/Forte-Enterprise-1",
+      "handshake_ms": {
+        "median": 228.98691697628237,
+        "min": 224.96124997269362
+      },
+      "api_ms": {
+        "median": 209.37216700986028,
+        "min": 201.278334017843,
+        "p90": 247.40570798167028,
+        "max": 299.3256250047125
+      }
+    },
+    {
+      "region": "us-west-1",
+      "site": "N. California",
+      "device": "rigetti/Cepheus-1-108Q",
+      "handshake_ms": {
+        "median": 341.08641601051204,
+        "min": 335.1596669817809
+      },
+      "api_ms": {
+        "median": 654.0418329823297,
+        "min": 606.8469590099994,
+        "p90": 907.9199169937056,
+        "max": 914.8713749891613
+      }
+    },
+    {
+      "region": "us-west-2",
+      "site": "Oregon",
+      "device": "sim:amazon/sv1",
+      "handshake_ms": {
+        "median": 367.1171250171028,
+        "min": 359.25220799981616
+      },
+      "api_ms": {
+        "median": 234.42083402187563,
+        "min": 222.94845801661722,
+        "p90": 245.991417003097,
+        "max": 495.7202499790583
+      }
+    }
+  ]
+}
