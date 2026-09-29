@@ -18,4 +18,4 @@ Version um 28 % zu niedrig (78 ms × 3,016/2,164 ≈ 109 ms).
 Messung aus Artikel 3, abgebrochen, weil das lokale Netz instabil war (wechselnde
 Verbindungen). Handshake nach us-west-1 5.175 bzw. 463 ms, nach Stockholm 147 bzw.
 262 ms (23.09.: 71 ms). Die Werte messen das lokale Netz, nicht Braket. Artikel 3
-stützt sich weiter auf die Messung vom 23.09.2026 (quellen-dossier.md).
+stützt sich weiter auf die Messung vom 23.09.2026 (source-dossier.de.md).

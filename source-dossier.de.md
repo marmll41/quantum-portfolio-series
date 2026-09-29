@@ -1,5 +1,7 @@
 # Quellen-Dossier — Quantum Portfolio Optimization auf AWS
 
+[English](source-dossier.md) · **Deutsch**
+
 Stand: 2026-09-22
 
 Belegsammlung für die Artikelserie. Jede Quelle mit Status, Kernzahlen,
@@ -465,8 +467,8 @@ nicht belegt.
 
 ### Wiederholung 2026-09-29 (drei Läufe direkt hintereinander, stabiles Netz)
 
-`results_api_latency_2026-09-29_run{1,2,3}.json`, gleiches Skript
-(`probe_api_latency.py`, 15 Aufrufe je Gerät), 10:23–10:27 Uhr. API-Median je Lauf:
+`results/results_api_latency_2026-09-29_run{1,2,3}.json`, gleiches Skript
+(`python/probe_api_latency.py`, 15 Aufrufe je Gerät), 10:23–10:27 Uhr. API-Median je Lauf:
 
 | Region / Gerät | Lauf 1 | Lauf 2 | Lauf 3 | Handshake | 23.09. |
 |---|---:|---:|---:|---:|---:|

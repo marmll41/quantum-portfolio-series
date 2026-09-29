@@ -162,7 +162,8 @@ limit per device in the Braket console first.
 | `python/medium_export.py` | Turns an article into Medium-ready HTML with tables as images |
 | `results/` | All measured results (`results_*.json`, `throughput*.json`, `julia_*.json`, `article4_*.json`, `hw_*.json`) and `benchmark.log` |
 | `archiv/` | First version (synthetic model) and discarded runs, with notes |
-| `quellen-dossier.md`, `ergebnisse-speedup.md` | Source dossier and result notes (German) |
+| `source-dossier.md`, `source-dossier.de.md` | Source dossier (English, German) |
+| `speedup-results.md`, `speedup-results.de.md` | Result notes on the speedup measurement (English, German) |
 
 ## License
 

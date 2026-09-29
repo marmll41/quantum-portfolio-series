@@ -1,5 +1,7 @@
 # Speedup-Messung: Julia, Quasi-Monte-Carlo, Importance Sampling
 
+[English](speedup-results.md) · **Deutsch**
+
 Stand 24.09.2026, endgültige Messung. Frage: Lässt sich die klassische
 Baseline schlagen — mit einer schnelleren Sprache oder mit einer besseren
 Methode? Und was davon übersteht echte Daten und dicke Enden?
@@ -57,4 +59,4 @@ Konstante, Messung nur noch zur Kontrolle.
 
 ## Reproduktion
 
-`./run_benchmarks.sh` (siehe README).
+`./shell/run_benchmarks.sh` (siehe [README](README.de.md)).

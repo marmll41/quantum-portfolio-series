@@ -1,8 +1,10 @@
 # License for documentation and data
 
-The documentation texts (`README.md`, `README.de.md`,
-`quellen-dossier.md`, `ergebnisse-speedup.md`, `archiv/README.md`) and result files (`results_*.json`, `data/*.json`, `data/*.npz`,
-`*.log`) in this repository are licensed under the
+The documentation texts (`README.md`, `README.de.md`, `source-dossier.md`,
+`source-dossier.de.md`, `speedup-results.md`, `speedup-results.de.md`,
+`archiv/README.md`) and the
+data and result files (everything in `results/`, `data/` and `archiv/`) in
+this repository are licensed under the
 **Creative Commons Attribution 4.0 International License (CC BY 4.0)**.
 
 © 2026 Marcel Mueller
