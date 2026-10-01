@@ -36,6 +36,18 @@ SAMPLE_TIMES = [  # (lo, hi) in seconds, quantum?
     ((0.97, 0.97), True),
 ]
 
+# Article 2: time to target accuracy for plain Monte Carlo on 14 cores, from
+# the table in the article (N from the exact error constant, time from the
+# measured 14-core throughput). Every factor of ten in accuracy is a factor
+# of a hundred in paths, hence in time.
+TIME_TO_EPS = [  # (eps exponent, seconds)
+    (-2, 2.2e-3),
+    (-3, 0.268),
+    (-4, 22.0),
+    (-5, 37 * 60.0),
+    (-6, 2.6 * 86400.0),
+]
+
 COVERS = {
     1: {
         "en": dict(
@@ -63,7 +75,55 @@ COVERS = {
             footer="Gemessen: klassisch, IQM Garnet. Geschätzt: nur Gates.",
             footer_size=18),
     },
+    2: {
+        "en": dict(
+            out="cover_article02_en.png",
+            kicker="QUANTUM PORTFOLIO RISK ON AWS BRAKET  ·  PART 2",
+            title="Ten times the accuracy, a hundred times the time",
+            title_size=42,
+            subtitle="Plain Monte Carlo, CVaR 99% of the S&P 500 top 100, "
+                     "14 cores — time to target accuracy ε", subtitle_size=26,
+            eps_label="ε = {} ({})", pct=["1%", "0.1%", "0.01%", "0.001%",
+                                          "0.0001%"],
+            times=["2.2 ms", "268 ms", "22 s", "37 min", "2.6 days"],
+            footer="ε relative to the closed-form CVaR. Apple M3 Max, "
+                   "NumPy on Accelerate.", footer_size=18),
+        "de": dict(
+            out="cover_artikel02_de.png",
+            kicker="QUANTEN-PORTFOLIORISIKO AUF AWS BRAKET  ·  TEIL 2",
+            title="Zehnfache Genauigkeit, hundertfache Zeit", title_size=48,
+            subtitle="Einfaches Monte Carlo, CVaR 99 % der S&P-500-Top-100, "
+                     "14 Kerne — Zeit bis zur Zielgenauigkeit ε",
+            subtitle_size=24,
+            eps_label="ε = {} ({})", pct=["1 %", "0,1 %", "0,01 %",
+                                          "0,001 %", "0,0001 %"],
+            times=["2,2 ms", "268 ms", "22 s", "37 min", "2,6 Tage"],
+            footer="ε relativ zum exakten CVaR. Apple M3 Max, NumPy auf "
+                   "Accelerate.", footer_size=18),
+    },
 }
+
+
+def title_block(fig, c):
+    fig.text(0.07, 0.86, c["kicker"], fontsize=20, color=P["ink2"],
+             fontweight="bold")
+    fig.text(0.07, 0.72, c["title"], fontsize=c["title_size"],
+             color=P["ink"], fontweight="bold")
+    fig.text(0.07, 0.645, c["subtitle"], fontsize=c["subtitle_size"],
+             color=P["ink2"])
+
+
+def style_log_axis(ax, ticks, labels):
+    ax.set_xscale("log")
+    ax.set_yticks([])
+    ax.set_xticks(ticks)
+    ax.set_xticklabels(labels, fontsize=18, color=P["ink2"])
+    for s in ("top", "right", "left"):
+        ax.spines[s].set_visible(False)
+    ax.spines["bottom"].set_color(P["grid"])
+    ax.tick_params(axis="x", colors=P["ink2"], length=0)
+    ax.grid(axis="x", color=P["grid"], lw=1)
+    ax.set_axisbelow(True)
 
 
 def fmt_time(lo, hi):
@@ -81,12 +141,7 @@ def fmt_time(lo, hi):
 def render_sample_times(c, out):
     fig = plt.figure(figsize=(19.2, 10.8), dpi=100)
     fig.patch.set_facecolor(P["surface"])
-    fig.text(0.07, 0.86, c["kicker"], fontsize=20, color=P["ink2"],
-             fontweight="bold")
-    fig.text(0.07, 0.72, c["title"], fontsize=c["title_size"],
-             color=P["ink"], fontweight="bold")
-    fig.text(0.07, 0.645, c["subtitle"], fontsize=c["subtitle_size"],
-             color=P["ink2"])
+    title_block(fig, c)
 
     ax = fig.add_axes([0.35, 0.13, 0.57, 0.44])
     ax.set_facecolor(P["surface"])
@@ -100,19 +155,10 @@ def render_sample_times(c, out):
                 color=P["ink"])
         fig.text(0.07, 0.13 + 0.44 * (yi + 0.5) / n, label, va="center",
                  fontsize=22, color=P["ink"])
-    ax.set_xscale("log")
+    style_log_axis(ax, [1e-7, 1e-5, 1e-3, 1e-1, 10],
+                   ["100 ns", "10 µs", "1 ms", "100 ms", "10 s"])
     ax.set_xlim(base, 60)
     ax.set_ylim(-0.6, n - 0.4)
-    ax.set_yticks([])
-    ax.set_xticks([1e-7, 1e-5, 1e-3, 1e-1, 10])
-    ax.set_xticklabels(["100 ns", "10 µs", "1 ms", "100 ms", "10 s"],
-                       fontsize=18, color=P["ink2"])
-    for s in ("top", "right", "left"):
-        ax.spines[s].set_visible(False)
-    ax.spines["bottom"].set_color(P["grid"])
-    ax.tick_params(axis="x", colors=P["ink2"], length=0)
-    ax.grid(axis="x", color=P["grid"], lw=1)
-    ax.set_axisbelow(True)
 
     classical, quantum, x2 = c["legend"]
     fig.text(0.07, 0.045, "■", fontsize=20, color=P["s1"])
@@ -128,7 +174,41 @@ def render_sample_times(c, out):
     print(f"wrote {out}")
 
 
-RENDER = {1: render_sample_times}
+def render_time_to_eps(c, out):
+    fig = plt.figure(figsize=(19.2, 10.8), dpi=100)
+    fig.patch.set_facecolor(P["surface"])
+    title_block(fig, c)
+
+    ax = fig.add_axes([0.35, 0.13, 0.57, 0.44])
+    ax.set_facecolor(P["surface"])
+    n = len(TIME_TO_EPS)
+    base = 1e-4
+    sup = {-2: "10⁻²", -3: "10⁻³", -4: "10⁻⁴", -5: "10⁻⁵", -6: "10⁻⁶"}
+    for yi, (e, sec), pct, txt in zip(np.arange(n)[::-1], TIME_TO_EPS,
+                                      c["pct"], c["times"]):
+        headline = e == -3            # the target of the series
+        ax.barh(yi, sec - base, left=base, height=0.62,
+                color=P["s1"] if headline else P["grid"])
+        ax.text(sec * 1.6, yi, txt, va="center", fontsize=22,
+                color=P["ink"], fontweight="bold" if headline else "normal")
+        fig.text(0.07, 0.13 + 0.44 * (yi + 0.5) / n,
+                 c["eps_label"].format(sup[e], pct), va="center",
+                 fontsize=22, color=P["ink"],
+                 fontweight="bold" if headline else "normal")
+    style_log_axis(ax, [1e-3, 1, 60, 3600, 86400],
+                   ["1 ms", "1 s", "1 min", "1 h", "1 d"])
+    ax.set_xlim(base, 3e6)
+    ax.set_ylim(-0.6, n - 0.4)
+
+    fig.text(0.93, 0.045, c["footer"], ha="right",
+             fontsize=c["footer_size"], color=P["ink2"], style="italic")
+    os.makedirs("figures", exist_ok=True)
+    fig.savefig(out, facecolor=P["surface"])
+    plt.close(fig)
+    print(f"wrote {out}")
+
+
+RENDER = {1: render_sample_times, 2: render_time_to_eps}
 
 if __name__ == "__main__":
     wanted = [int(a) for a in sys.argv[1:]] or sorted(COVERS)

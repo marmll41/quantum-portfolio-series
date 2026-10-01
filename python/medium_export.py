@@ -67,10 +67,17 @@ def render_table(lines, out: Path, max_chars: int = 34):
     bold = [[r == 0 or (c.startswith("**") if c else False)
              for c in row] for r, row in enumerate([header] + body)]
     natural = [max(len(r[i]) for r in cells) for i in range(ncol)]
-    # other columns wrap at 12 characters at most; the first (label) column
-    # gets whatever is left, but never less than 18
-    widths = [natural[0]] + [min(n, 10) for n in natural[1:]]
-    widths[0] = max(14, min(natural[0], max_chars - sum(widths[1:]) - 2 * ncol))
+    # longest piece that cannot wrap, e.g. 3,102,839,025,470
+    token = [max(len(w) for r in cells for w in (r[i].split() or [""]))
+             for i in range(ncol)]
+    # other columns wrap at 10 characters, but never below their longest
+    # unbreakable token -- a first version capped them at 10 and let long
+    # numbers run into the next column. The first (label) column gets what
+    # is left, at least 14 characters if it needs them.
+    widths = [natural[0]] + [min(n, max(10, k))
+                             for n, k in zip(natural[1:], token[1:])]
+    widths[0] = min(natural[0], max(14, token[0],
+                                    max_chars - sum(widths[1:]) - 2 * ncol))
     wrapped = [[textwrap.wrap(c, widths[i], break_long_words=False,
                               break_on_hyphens=False) or [""]
                 for i, c in enumerate(r)]
@@ -78,7 +85,10 @@ def render_table(lines, out: Path, max_chars: int = 34):
     heights = [max(len(c) for c in r) for r in wrapped]
     col_w = [w + 2 for w in widths]
     total = sum(col_w)
-    line_h = 0.36
+    # the font is sized for max_chars; a wider table shrinks it so that
+    # every column still holds its text
+    fs = 12 * min(1.0, (max_chars + 2 * ncol) / total)
+    line_h = 0.36 * fs / 12
     fig_w = 4.4
     fig_h = line_h * sum(0.82 * h + 0.55 for h in heights) + 0.2
     fig, ax = plt.subplots(figsize=(fig_w, fig_h), dpi=220)
@@ -92,7 +102,7 @@ def render_table(lines, out: Path, max_chars: int = 34):
         x = 0
         for c in range(ncol):
             txt = "\n".join(row[c])
-            kw = dict(fontsize=12, color=P["ink"], va="center",
+            kw = dict(fontsize=fs, color=P["ink"], va="center",
                       linespacing=1.25,
                       fontweight="bold" if bold[r][c] else "normal")
             yc = y + rows_h[r] / 2
