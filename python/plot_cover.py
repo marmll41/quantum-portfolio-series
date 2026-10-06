@@ -8,6 +8,7 @@ platforms print right above the image anyway.
 
     python python/plot_cover.py            # all covers, both languages
     python python/plot_cover.py 1          # article 1 only
+    python python/plot_cover.py 2b         # article 2b only
 """
 import os
 import sys
@@ -46,6 +47,16 @@ TIME_TO_EPS = [  # (eps exponent, seconds)
     (-4, 22.0),
     (-5, 37 * 60.0),
     (-6, 2.6 * 86400.0),
+]
+
+# Article 2b: time to eps = 1e-3 on 14 cores per method, normal and
+# Student-t, from the table in the article (results/results_vr_sp100_*.json,
+# results/julia_accelerate_14.json). Julia was run for the normal case only.
+METHODS = [  # (normal ms, t ms or None)
+    (268.0, 1853.0),     # NumPy, plain MC
+    (173.0, None),       # Julia, Accelerate
+    (17.0, 109.0),       # quasi-MC, PCA order
+    (4.7, 1659.0),       # importance sampling
 ]
 
 COVERS = {
@@ -100,6 +111,35 @@ COVERS = {
             times=["2,2 ms", "268 ms", "22 s", "37 min", "2,6 Tage"],
             footer="ε relativ zum exakten CVaR. Apple M3 Max, NumPy auf "
                    "Accelerate.", footer_size=18),
+    },
+    "2b": {
+        "en": dict(
+            out="cover_article02b_en.png",
+            kicker="QUANTUM PORTFOLIO RISK ON AWS BRAKET  ·  PART 2B",
+            title="The method is worth 57×, the language 1.5×", title_size=46,
+            subtitle="CVaR 99% of the S&P 500 top 100, ε = 10⁻³, 14 cores — "
+                     "time per method", subtitle_size=26,
+            labels=["NumPy, plain Monte Carlo", "Julia, Apple Accelerate",
+                    "Quasi-Monte Carlo, PCA", "Importance sampling"],
+            legend=("normal returns", "fat tails (Student-t)", 0.235),
+            fmt=lambda ms: (f"{ms:,.0f} ms" if ms >= 10 else f"{ms:.1f} ms"),
+            na="not run",
+            footer="Under fat tails importance sampling falls to 1.1×; "
+                   "quasi-MC keeps 17×.", footer_size=18),
+        "de": dict(
+            out="cover_artikel02b_de.png",
+            kicker="QUANTEN-PORTFOLIORISIKO AUF AWS BRAKET  ·  TEIL 2B",
+            title="Die Methode bringt 57×, die Sprache 1,5×", title_size=46,
+            subtitle="CVaR 99 % der S&P-500-Top-100, ε = 10⁻³, 14 Kerne — "
+                     "Zeit je Verfahren", subtitle_size=26,
+            labels=["NumPy, einfaches Monte Carlo", "Julia, Apple Accelerate",
+                    "Quasi-Monte-Carlo, PCA", "Importance Sampling"],
+            legend=("Normalverteilung", "Fat Tails (Student-t)", 0.215),
+            fmt=lambda ms: (f"{ms:,.0f} ms".replace(",", ".") if ms >= 10
+                            else f"{ms:.1f} ms".replace(".", ",")),
+            na="nicht gemessen",
+            footer="Bei Fat Tails fällt Importance Sampling auf 1,1×; "
+                   "Quasi-MC hält 17×.", footer_size=18),
     },
 }
 
@@ -208,10 +248,50 @@ def render_time_to_eps(c, out):
     print(f"wrote {out}")
 
 
-RENDER = {1: render_sample_times, 2: render_time_to_eps}
+def render_methods(c, out):
+    fig = plt.figure(figsize=(19.2, 10.8), dpi=100)
+    fig.patch.set_facecolor(P["surface"])
+    title_block(fig, c)
+
+    ax = fig.add_axes([0.35, 0.13, 0.57, 0.44])
+    ax.set_facecolor(P["surface"])
+    n = len(METHODS)
+    base = 1.0                               # ms, left edge of the log axis
+    for yi, (normal, fat), label in zip(np.arange(n)[::-1], METHODS,
+                                        c["labels"]):
+        for dy, ms, colour in ((0.19, normal, P["s1"]), (-0.19, fat, P["s2"])):
+            if ms is None:
+                ax.text(base * 1.3, yi + dy, c["na"], va="center",
+                        fontsize=18, color=P["ink2"], style="italic")
+                continue
+            ax.barh(yi + dy, ms - base, left=base, height=0.34, color=colour)
+            ax.text(ms * 1.25, yi + dy, c["fmt"](ms), va="center",
+                    fontsize=20, color=P["ink"])
+        fig.text(0.07, 0.13 + 0.44 * (yi + 0.5) / n, label, va="center",
+                 fontsize=22, color=P["ink"])
+    style_log_axis(ax, [1, 10, 100, 1000],
+                   ["1 ms", "10 ms", "100 ms", "1 s"])
+    ax.set_xlim(base, 6000)
+    ax.set_ylim(-0.6, n - 0.4)
+
+    normal, fat, x2 = c["legend"]
+    fig.text(0.07, 0.045, "■", fontsize=20, color=P["s1"])
+    fig.text(0.085, 0.045, normal, fontsize=18, color=P["ink2"])
+    fig.text(x2, 0.045, "■", fontsize=20, color=P["s2"])
+    fig.text(x2 + 0.015, 0.045, fat, fontsize=18, color=P["ink2"])
+    fig.text(0.93, 0.045, c["footer"], ha="right",
+             fontsize=c["footer_size"], color=P["ink2"], style="italic")
+    os.makedirs("figures", exist_ok=True)
+    fig.savefig(out, facecolor=P["surface"])
+    plt.close(fig)
+    print(f"wrote {out}")
+
+
+RENDER = {1: render_sample_times, 2: render_time_to_eps, "2b": render_methods}
 
 if __name__ == "__main__":
-    wanted = [int(a) for a in sys.argv[1:]] or sorted(COVERS)
+    keys = {str(k): k for k in COVERS}
+    wanted = [keys[a] for a in sys.argv[1:]] or list(COVERS)
     for article in wanted:
         for lang, c in COVERS[article].items():
             RENDER[article](c, os.path.join("figures", c["out"]))

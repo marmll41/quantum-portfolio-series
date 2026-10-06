@@ -212,9 +212,11 @@ def convert(md: str, outdir: Path, src_dir: Path):
             i += 1
             continue
         j, buf = i, []
+        # as in CommonMark, only "1. " may interrupt a paragraph; a wrapped
+        # line that happens to start with "2. " is still part of the text
         while (j < len(lines) and lines[j].strip()
-               and not re.match(r"(#{1,4} |```|\||>|!\[|- |\d+\. |---$)",
-                                lines[j])):
+               and (j == i or not re.match(
+                   r"(#{1,4} |```|\||>|!\[|- |1\. |---$)", lines[j]))):
             buf.append(lines[j].strip())
             j += 1
         out.append(f"<p>{inline(' '.join(buf))}</p>")
